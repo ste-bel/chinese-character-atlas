@@ -11,7 +11,7 @@ The goal is to ensure that the encyclopedia remains scalable, maintainable, and 
 # Directory Structure
 
 ```
-content/
+atlas/
     lessons/
     words/
     characters/

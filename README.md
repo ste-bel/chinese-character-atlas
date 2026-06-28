@@ -17,11 +17,11 @@ Learn Chinese through:
 
 ## Structure
 
-- `content/words` — word entries, W0001, W0002...
-- `content/characters` — individual character pages
-- `content/components` — radicals/components like 日, 女, 木
-- `content/lessons` — 20-word learning paths
-- `content/books` — classical and modern references
+- `atlas/words` — word entries, W0001, W0002...
+- `atlas/characters` — individual character pages
+- `atlas/components` — radicals/components like 日, 女, 木
+- `atlas/lessons` — 20-word learning paths
+- `atlas/books` — classical and modern references
 - `assets` — images, seals, CSS, JavaScript, audio
 - `templates` — page templates
 - `build` — generated output
