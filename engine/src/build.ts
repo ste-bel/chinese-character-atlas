@@ -55,6 +55,23 @@ function outPath(source: string): string {
   return path.join(docsDir, rel);
 }
 
+function siteUrl(output: string): string {
+  return "/" + path.relative(docsDir, output).replace(/\\/g, "/");
+}
+
+function writeIndexPage(type: string, title: string, entries: any[]) {
+  const body = `
+<section class="card">
+<h1>${title}</h1>
+<ul>
+${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${e.id || ""} ${e.hanzi || ""} ${e.title || ""}</a>${e.pinyin ? ` — <em>${e.pinyin}</em>` : ""}</li>`).join("\n")}
+</ul>
+</section>`;
+  const file = path.join(docsDir, type, "index.html");
+  ensureDir(file);
+  fs.writeFileSync(file, layout(title, body), "utf8");
+}
+
 fs.mkdirSync(docsDir, { recursive: true });
 
 const files = walk(atlasDir);
@@ -76,14 +93,15 @@ for (const file of files) {
     hanzi: parsed.data.hanzi || null,
     pinyin: parsed.data.pinyin || null,
     title,
-    url: "/" + path.relative(docsDir, output).replace(/\\/g, "/")
+    url: siteUrl(output)
   });
 }
 
-fs.writeFileSync(
-  path.join(docsDir, "search-index.json"),
-  JSON.stringify(index, null, 2),
-  "utf8"
-);
+fs.writeFileSync(path.join(docsDir, "search-index.json"), JSON.stringify(index, null, 2), "utf8");
 
-console.log(`Built ${files.length} atlas pages.`);
+writeIndexPage("words", "Word Atlas", index.filter(e => e.type === "word"));
+writeIndexPage("characters", "Character Atlas", index.filter(e => e.type === "character"));
+writeIndexPage("components", "Component Atlas", index.filter(e => e.type === "component"));
+writeIndexPage("lessons", "Learning Paths", index.filter(e => e.type === "lesson"));
+
+console.log(`Built ${files.length} atlas pages and index pages.`);
