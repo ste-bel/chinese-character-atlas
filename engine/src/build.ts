@@ -9,6 +9,7 @@ import { page } from "./templates.js";
 import { extractLinks, preprocess } from "./markdown.js";
 import { backlinksSection } from "./graph.js";
 import { relationSection } from "./relations.js";
+import { writeStatistics } from "./statistics.js";
 import { writeIndexPage } from "./indexPages.js";
 
 function outPath(source: string): string {
@@ -54,6 +55,7 @@ for (const entry of entries) {
 }
 
 fs.writeFileSync(path.join(DOCS, "search-index.json"), JSON.stringify(entries, null, 2), "utf8");
+writeStatistics(entries);
 
 writeIndexPage("words", "Word Atlas", entries.filter(e => e.type === "word"));
 writeIndexPage("characters", "Character Atlas", entries.filter(e => e.type === "character"));
