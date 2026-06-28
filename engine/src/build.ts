@@ -7,6 +7,16 @@ const root = process.cwd();
 const atlasDir = path.join(root, "atlas");
 const docsDir = path.join(root, "docs");
 
+type Entry = {
+  id: string | null;
+  type: string | null;
+  hanzi: string | null;
+  pinyin: string | null;
+  title: string;
+  source: string;
+  url: string;
+};
+
 function walk(dir: string): string[] {
   if (!fs.existsSync(dir)) return [];
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap(entry => {
@@ -17,13 +27,35 @@ function walk(dir: string): string[] {
 }
 
 function esc(s: string): string {
-  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+  return String(s)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
 }
 
-function preprocess(md: string): string {
-  return md.replace(/\{\{audio:(.*?)\}\}/g, (_, text) =>
+function outPath(source: string): string {
+  return path.join(docsDir, path.relative(atlasDir, source).replace(/\.md$/, ".html"));
+}
+
+function siteUrl(output: string): string {
+  return "/" + path.relative(docsDir, output).replace(/\\/g, "/");
+}
+
+function preprocess(md: string, byId: Map<string, Entry>): string {
+  let out = md.replace(/\{\{audio:(.*?)\}\}/g, (_, text) =>
     `<button class="audio" onclick="speak('${esc(text)}')">🔊</button>`
   );
+
+  out = out.replace(/\[\[([A-Z]+\d+)(?:\|([^\]]+))?\]\]/g, (_, id, label) => {
+    const entry = byId.get(id);
+    if (!entry) return `[[${id}]]`;
+    const text = label || `${entry.id} ${entry.hanzi || entry.title}`;
+    return `<a href="/chinese-character-atlas${entry.url}">${esc(text)}</a>`;
+  });
+
+  return out;
 }
 
 function layout(title: string, body: string): string {
@@ -31,7 +63,7 @@ function layout(title: string, body: string): string {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>${title}</title>
+<title>${esc(title)}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/chinese-character-atlas/assets/css/style.css">
 <script src="/chinese-character-atlas/assets/js/audio.js"></script>
@@ -57,17 +89,9 @@ function ensureDir(file: string) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
 }
 
-function outPath(source: string): string {
-  return path.join(docsDir, path.relative(atlasDir, source).replace(/\.md$/, ".html"));
-}
-
-function siteUrl(output: string): string {
-  return "/" + path.relative(docsDir, output).replace(/\\/g, "/");
-}
-
-function writeIndexPage(type: string, title: string, entries: any[]) {
-  const body = `<section class="card"><h1>${title}</h1><ul>
-${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${e.id || ""} ${e.hanzi || ""} ${e.title || ""}</a>${e.pinyin ? ` — <em>${e.pinyin}</em>` : ""}</li>`).join("\n")}
+function writeIndexPage(type: string, title: string, entries: Entry[]) {
+  const body = `<section class="card"><h1>${esc(title)}</h1><ul>
+${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id || ""} ${e.hanzi || ""} ${e.title || ""}`)}</a>${e.pinyin ? ` — <em>${esc(e.pinyin)}</em>` : ""}</li>`).join("\n")}
 </ul></section>`;
   const file = path.join(docsDir, type, "index.html");
   ensureDir(file);
@@ -75,33 +99,40 @@ ${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${e.id || ""}
 }
 
 const files = walk(atlasDir);
-const index: any[] = [];
+const entries: Entry[] = [];
 
 for (const file of files) {
   const raw = fs.readFileSync(file, "utf8");
   const parsed = matter(raw);
-  const title = parsed.data.title || parsed.data.hanzi || path.basename(file, ".md");
-  const html = marked.parse(preprocess(parsed.content));
   const output = outPath(file);
-
-  ensureDir(output);
-  fs.writeFileSync(output, layout(title, html.toString()), "utf8");
-
-  index.push({
+  entries.push({
     id: parsed.data.id || null,
     type: parsed.data.type || null,
     hanzi: parsed.data.hanzi || null,
     pinyin: parsed.data.pinyin || null,
-    title,
+    title: parsed.data.title || parsed.data.hanzi || path.basename(file, ".md"),
+    source: file,
     url: siteUrl(output)
   });
 }
 
-fs.writeFileSync(path.join(docsDir, "search-index.json"), JSON.stringify(index, null, 2), "utf8");
+const byId = new Map(entries.filter(e => e.id).map(e => [e.id as string, e]));
 
-writeIndexPage("words", "Word Atlas", index.filter(e => e.type === "word"));
-writeIndexPage("characters", "Character Atlas", index.filter(e => e.type === "character"));
-writeIndexPage("components", "Component Atlas", index.filter(e => e.type === "component"));
-writeIndexPage("lessons", "Learning Paths", index.filter(e => e.type === "lesson"));
+for (const entry of entries) {
+  const raw = fs.readFileSync(entry.source, "utf8");
+  const parsed = matter(raw);
+  const html = marked.parse(preprocess(parsed.content, byId));
+  const output = outPath(entry.source);
 
-console.log(`Built ${files.length} pages.`);
+  ensureDir(output);
+  fs.writeFileSync(output, layout(entry.title, html.toString()), "utf8");
+}
+
+fs.writeFileSync(path.join(docsDir, "search-index.json"), JSON.stringify(entries, null, 2), "utf8");
+
+writeIndexPage("words", "Word Atlas", entries.filter(e => e.type === "word"));
+writeIndexPage("characters", "Character Atlas", entries.filter(e => e.type === "character"));
+writeIndexPage("components", "Component Atlas", entries.filter(e => e.type === "component"));
+writeIndexPage("lessons", "Learning Paths", entries.filter(e => e.type === "lesson"));
+
+console.log(`Built ${entries.length} pages.`);

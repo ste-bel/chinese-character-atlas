@@ -5,6 +5,7 @@
     "hanzi": null,
     "pinyin": "Zhūgě Liàng",
     "title": "诫子书",
+    "source": "/workspaces/chinese-character-atlas/atlas/books/zhuge-liang-admonitions-to-my-son.md",
     "url": "/books/zhuge-liang-admonitions-to-my-son.html"
   },
   {
@@ -13,6 +14,7 @@
     "hanzi": "是",
     "pinyin": "shì",
     "title": "The Character 是",
+    "source": "/workspaces/chinese-character-atlas/atlas/characters/CH0001-是.md",
     "url": "/characters/CH0001-是.html"
   },
   {
@@ -21,6 +23,7 @@
     "hanzi": "日",
     "pinyin": "rì",
     "title": "日",
+    "source": "/workspaces/chinese-character-atlas/atlas/components/CMP0001-日.md",
     "url": "/components/CMP0001-日.html"
   },
   {
@@ -29,6 +32,7 @@
     "hanzi": "日",
     "pinyin": "rì",
     "title": "日",
+    "source": "/workspaces/chinese-character-atlas/atlas/components/日.md",
     "url": "/components/日.html"
   },
   {
@@ -37,6 +41,7 @@
     "hanzi": null,
     "pinyin": null,
     "title": "The First 20 Words",
+    "source": "/workspaces/chinese-character-atlas/atlas/lessons/lesson-001.md",
     "url": "/lessons/lesson-001.html"
   },
   {
@@ -45,6 +50,7 @@
     "hanzi": "是",
     "pinyin": "shì",
     "title": "The Character of Existence",
+    "source": "/workspaces/chinese-character-atlas/atlas/words/W0001-是.md",
     "url": "/words/W0001-是.html"
   }
 ]
