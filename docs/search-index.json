@@ -1,0 +1,50 @@
+[
+  {
+    "id": "B0001",
+    "type": "book",
+    "hanzi": null,
+    "pinyin": "Zhūgě Liàng",
+    "title": "诫子书",
+    "url": "/books/zhuge-liang-admonitions-to-my-son.html"
+  },
+  {
+    "id": "CH0001",
+    "type": "character",
+    "hanzi": "是",
+    "pinyin": "shì",
+    "title": "The Character 是",
+    "url": "/characters/CH0001-是.html"
+  },
+  {
+    "id": "CMP0001",
+    "type": "component",
+    "hanzi": "日",
+    "pinyin": "rì",
+    "title": "日",
+    "url": "/components/CMP0001-日.html"
+  },
+  {
+    "id": "C0001",
+    "type": "component",
+    "hanzi": "日",
+    "pinyin": "rì",
+    "title": "日",
+    "url": "/components/日.html"
+  },
+  {
+    "id": "L0001",
+    "type": null,
+    "hanzi": null,
+    "pinyin": null,
+    "title": "The First 20 Words",
+    "url": "/lessons/lesson-001.html"
+  },
+  {
+    "id": "W0001",
+    "type": "word",
+    "hanzi": "是",
+    "pinyin": "shì",
+    "title": "The Character of Existence",
+    "url": "/words/W0001-是.html"
+  }
+]

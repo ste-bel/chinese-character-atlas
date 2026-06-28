@@ -1,0 +1,14 @@
+{
+  "name": "chinese-character-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx engine/src/build.ts"
+  },
+  "dependencies": {
+    "gray-matter": "latest",
+    "marked": "latest",
+    "tsx": "latest"
+  }
+}
