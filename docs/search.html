@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Search — Chinese Character Atlas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/chinese-character-atlas/assets/css/style.css">
+<style>
+input {
+  width: 100%;
+  padding: .8rem;
+  font-size: 1.1rem;
+  border: 1px solid #ddc7a1;
+  border-radius: 10px;
+}
+.result {
+  padding: .7rem 0;
+  border-bottom: 1px solid #ddc7a1;
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Search</h1>
+  <p>Chinese Character Atlas</p>
+</header>
+
+<main>
+<nav class="card">
+<a href="/chinese-character-atlas/">Home</a> ·
+<a href="/chinese-character-atlas/lessons/">Lessons</a> ·
+<a href="/chinese-character-atlas/words/">Words</a> ·
+<a href="/chinese-character-atlas/characters/">Characters</a> ·
+<a href="/chinese-character-atlas/components/">Components</a>
+</nav>
+
+<section class="card">
+<input id="q" placeholder="Search 是, shi, W0001, component..." autofocus>
+<div id="results"></div>
+</section>
+</main>
+
+<script>
+let entries = [];
+
+fetch("/chinese-character-atlas/search-index.json")
+  .then(r => r.json())
+  .then(data => {
+    entries = data;
+    render("");
+  });
+
+function textOf(e) {
+  return [
+    e.id,
+    e.type,
+    e.hanzi,
+    e.pinyin,
+    e.title,
+    e.url
+  ].filter(Boolean).join(" ").toLowerCase();
+}
+
+function render(query) {
+  const q = query.trim().toLowerCase();
+  const results = q
+    ? entries.filter(e => textOf(e).includes(q))
+    : entries.slice(0, 20);
+
+  document.getElementById("results").innerHTML = results.map(e => `
+    <div class="result">
+      <a href="/chinese-character-atlas${e.url}">
+        <strong>${e.id || ""} ${e.hanzi || ""}</strong> ${e.title || ""}
+      </a>
+      ${e.pinyin ? `<br><em>${e.pinyin}</em>` : ""}
+      ${e.type ? `<br><span class="badge">${e.type}</span>` : ""}
+    </div>
+  `).join("") || "<p>No results.</p>";
+}
+
+document.getElementById("q").addEventListener("input", e => render(e.target.value));
+</script>
+</body>
+</html>
