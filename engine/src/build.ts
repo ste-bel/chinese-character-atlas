@@ -16,6 +16,16 @@ function walk(dir: string): string[] {
   });
 }
 
+function esc(s: string): string {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function preprocess(md: string): string {
+  return md.replace(/\{\{audio:(.*?)\}\}/g, (_, text) =>
+    `<button class="audio" onclick="speak('${esc(text)}')">🔊</button>`
+  );
+}
+
 function layout(title: string, body: string): string {
   return `<!doctype html>
 <html lang="en">
@@ -27,17 +37,14 @@ function layout(title: string, body: string): string {
 <script src="/chinese-character-atlas/assets/js/audio.js"></script>
 </head>
 <body>
-<header>
-  <h1>Chinese Character Atlas</h1>
-  <p>Every character tells a story. Every story opens a civilization.</p>
-</header>
+<header><h1>Chinese Character Atlas</h1><p>Every character tells a story. Every story opens a civilization.</p></header>
 <main>
 <nav class="card">
-  <a href="/chinese-character-atlas/">Home</a> ·
-  <a href="/chinese-character-atlas/lessons/">Lessons</a> ·
-  <a href="/chinese-character-atlas/words/">Words</a> ·
-  <a href="/chinese-character-atlas/characters/">Characters</a> ·
-  <a href="/chinese-character-atlas/components/">Components</a>
+<a href="/chinese-character-atlas/">Home</a> ·
+<a href="/chinese-character-atlas/lessons/">Lessons</a> ·
+<a href="/chinese-character-atlas/words/">Words</a> ·
+<a href="/chinese-character-atlas/characters/">Characters</a> ·
+<a href="/chinese-character-atlas/components/">Components</a>
 </nav>
 ${body}
 </main>
@@ -51,8 +58,7 @@ function ensureDir(file: string) {
 }
 
 function outPath(source: string): string {
-  const rel = path.relative(atlasDir, source).replace(/\.md$/, ".html");
-  return path.join(docsDir, rel);
+  return path.join(docsDir, path.relative(atlasDir, source).replace(/\.md$/, ".html"));
 }
 
 function siteUrl(output: string): string {
@@ -60,19 +66,13 @@ function siteUrl(output: string): string {
 }
 
 function writeIndexPage(type: string, title: string, entries: any[]) {
-  const body = `
-<section class="card">
-<h1>${title}</h1>
-<ul>
+  const body = `<section class="card"><h1>${title}</h1><ul>
 ${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${e.id || ""} ${e.hanzi || ""} ${e.title || ""}</a>${e.pinyin ? ` — <em>${e.pinyin}</em>` : ""}</li>`).join("\n")}
-</ul>
-</section>`;
+</ul></section>`;
   const file = path.join(docsDir, type, "index.html");
   ensureDir(file);
   fs.writeFileSync(file, layout(title, body), "utf8");
 }
-
-fs.mkdirSync(docsDir, { recursive: true });
 
 const files = walk(atlasDir);
 const index: any[] = [];
@@ -81,7 +81,7 @@ for (const file of files) {
   const raw = fs.readFileSync(file, "utf8");
   const parsed = matter(raw);
   const title = parsed.data.title || parsed.data.hanzi || path.basename(file, ".md");
-  const html = marked.parse(parsed.content);
+  const html = marked.parse(preprocess(parsed.content));
   const output = outPath(file);
 
   ensureDir(output);
@@ -104,4 +104,4 @@ writeIndexPage("characters", "Character Atlas", index.filter(e => e.type === "ch
 writeIndexPage("components", "Component Atlas", index.filter(e => e.type === "component"));
 writeIndexPage("lessons", "Learning Paths", index.filter(e => e.type === "lesson"));
 
-console.log(`Built ${files.length} atlas pages and index pages.`);
+console.log(`Built ${files.length} pages.`);
