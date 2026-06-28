@@ -53,6 +53,10 @@ function preprocess(md: string, byId: Map<string, Entry>): string {
     `<button class="audio" onclick="speak('${esc(text)}')">🔊</button>`
   );
 
+  out = out.replace(/\{\{atlas-note\}\}([\s\S]*?)\{\{\/atlas-note\}\}/g, (_, content) =>
+    `<section class="atlas-note"><strong>Atlas Note</strong><br>${content.trim()}</section>`
+  );
+
   out = out.replace(/\[\[([A-Z]+\d+)(?:\|([^\]]+))?\]\]/g, (_, id, label) => {
     const entry = byId.get(id);
     if (!entry) return `[[${id}]]`;
