@@ -1,0 +1,6 @@
+blank_issues_enabled: true
+
+contact_links:
+  - name: Chinese Character Atlas Constitution
+    url: https://github.com/ste-bel/chinese-character-atlas/blob/main/CONSTITUTION.md
+    about: Read the project philosophy before contributing.
