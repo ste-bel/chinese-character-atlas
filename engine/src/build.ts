@@ -15,6 +15,7 @@ type Entry = {
   title: string;
   source: string;
   url: string;
+  linksTo: string[];
 };
 
 function walk(dir: string): string[] {
@@ -41,6 +42,10 @@ function outPath(source: string): string {
 
 function siteUrl(output: string): string {
   return "/" + path.relative(docsDir, output).replace(/\\/g, "/");
+}
+
+function extractLinks(md: string): string[] {
+  return [...md.matchAll(/\[\[([A-Z]+\d+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
 }
 
 function preprocess(md: string, byId: Map<string, Entry>): string {
@@ -89,6 +94,18 @@ function ensureDir(file: string) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
 }
 
+function backlinksSection(entry: Entry, entries: Entry[]): string {
+  if (!entry.id) return "";
+  const backlinks = entries.filter(e => e.linksTo.includes(entry.id as string));
+  if (!backlinks.length) return "";
+  return `<section class="card">
+<h2>Linked from</h2>
+<ul>
+${backlinks.map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id || ""} ${e.hanzi || ""} ${e.title}`)}</a></li>`).join("\n")}
+</ul>
+</section>`;
+}
+
 function writeIndexPage(type: string, title: string, entries: Entry[]) {
   const body = `<section class="card"><h1>${esc(title)}</h1><ul>
 ${entries.map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id || ""} ${e.hanzi || ""} ${e.title || ""}`)}</a>${e.pinyin ? ` — <em>${esc(e.pinyin)}</em>` : ""}</li>`).join("\n")}
@@ -112,7 +129,8 @@ for (const file of files) {
     pinyin: parsed.data.pinyin || null,
     title: parsed.data.title || parsed.data.hanzi || path.basename(file, ".md"),
     source: file,
-    url: siteUrl(output)
+    url: siteUrl(output),
+    linksTo: extractLinks(parsed.content)
   });
 }
 
@@ -125,7 +143,7 @@ for (const entry of entries) {
   const output = outPath(entry.source);
 
   ensureDir(output);
-  fs.writeFileSync(output, layout(entry.title, html.toString()), "utf8");
+  fs.writeFileSync(output, layout(entry.title, html.toString() + backlinksSection(entry, entries)), "utf8");
 }
 
 fs.writeFileSync(path.join(docsDir, "search-index.json"), JSON.stringify(entries, null, 2), "utf8");
