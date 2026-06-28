@@ -8,6 +8,7 @@ import { walk, ensureDir } from "./utils.js";
 import { page } from "./templates.js";
 import { extractLinks, preprocess } from "./markdown.js";
 import { backlinksSection } from "./graph.js";
+import { relationSection } from "./relations.js";
 import { writeIndexPage } from "./indexPages.js";
 
 function outPath(source: string): string {
@@ -49,7 +50,7 @@ for (const entry of entries) {
   const output = outPath(entry.source);
 
   ensureDir(output);
-  fs.writeFileSync(output, page(entry.title, html.toString() + backlinksSection(entry, entries)), "utf8");
+  fs.writeFileSync(output, page(entry.title, html.toString() + relationSection(entry, byId, parsed.data) + backlinksSection(entry, entries)), "utf8");
 }
 
 fs.writeFileSync(path.join(DOCS, "search-index.json"), JSON.stringify(entries, null, 2), "utf8");
