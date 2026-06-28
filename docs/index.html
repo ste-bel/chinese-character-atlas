@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Chinese Character Atlas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --red: #9f1d14;
+      --dark-red: #6f120d;
+      --gold: #c58b2b;
+      --paper: #fff8ea;
+      --ink: #261713;
+      --line: #dfc89e;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #ead6b4, #fff8ea);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--dark-red), var(--red));
+      color: #fff3d2;
+      padding: 2rem 1.4rem;
+      border-bottom: 5px solid var(--gold);
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.2rem;
+    }
+
+    header p {
+      margin: .5rem 0 0;
+      font-size: 1.05rem;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: auto;
+      padding: 1.2rem;
+    }
+
+    .hero {
+      background: rgba(255, 250, 240, .92);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.4rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      margin-top: 1.2rem;
+    }
+
+    .motto {
+      font-size: 1.4rem;
+      color: var(--red);
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .card {
+      background: #fffaf0;
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--red);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      color: var(--red);
+    }
+
+    a {
+      color: var(--red);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #6b5545;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Chinese Character Atlas</h1>
+  <p>An Interactive Encyclopedia of Chinese Language, History and Culture</p>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="motto">Every character tells a story. Every story opens a civilization.</p>
+    <p>
+      This atlas explores Chinese through words, characters, components, pronunciation,
+      historical evolution, modern usage, regional differences, classical references,
+      mnemonics, and cultural meaning.
+    </p>
+  </section>
+
+  <section class="grid">
+    <div class="card">
+      <h2>Lessons</h2>
+      <p>Structured learning paths, 20 words at a time.</p>
+      <p><a href="../content/lessons/lesson-001.md">Start Lesson 1 →</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Words</h2>
+      <p>Permanent numbered entries like W0001, W0002, W0003.</p>
+      <p><a href="../content/words/W0001-shi.md">W0001 是 →</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Components</h2>
+      <p>Browse Chinese by building blocks: 日, 女, 木, 心, 口...</p>
+      <p><a href="../content/components/日.md">日 — Sun / Day →</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Books & Sources</h2>
+      <p>Classical and modern references used with care.</p>
+      <p><a href="../content/books/zhuge-liang-admonitions-to-my-son.md">诸葛亮《诫子书》→</a></p>
+    </div>
+
+    <div class="card">
+      <h2>Living Chinese</h2>
+      <p>How words feel in real life: speech, writing, internet, business, literature.</p>
+    </div>
+
+    <div class="card">
+      <h2>Knowledge Graph</h2>
+      <p>Every word links to characters, components, grammar, books, people, and culture.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  白朗志远 · Chinese Character Atlas
+</footer>
+
+</body>
+</html>
