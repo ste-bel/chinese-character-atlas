@@ -37,6 +37,24 @@
   --border-light:   #DDC7A1;   /* subtle dividers, inner sections   */
   --border-warm:    #B89060;   /* emphasis borders, active cards    */
 
+  /* ── Materials (Museum of Living Knowledge) ──────────────────────
+     The Atlas is built from real materials, not flat poster colours:
+     stone (architecture), bronze (age & authority), cinnabar (the seal),
+     gold (wayfinding), parchment (the page). */
+  --stone-deep:     #1E1A15;   /* deepest plinth / lower gallery     */
+  --stone:          #443C32;   /* structural dark surfaces           */
+  --stone-soft:     #877C6C;   /* muted structural text on light     */
+  --bronze-deep:    #5A4220;   /* aged metal, deep                   */
+  --bronze:         #7C5A2C;   /* era markers, manuscript rules      */
+  --bronze-light:   #A6814A;   /* bronze highlight                   */
+  --cinnabar:       #C5402A;   /* true seal vermilion (朱砂)          */
+  --cinnabar-deep:  #A12E1C;   /* seal vermilion, pressed            */
+
+  /* Parchment grain — inline SVG fractal noise, no external asset.
+     Laid faintly over --paper so the page reads as a real material. */
+  --texture-paper:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+
   /* ── Badges ──────────────────────────────────────────────────── */
   --badge-hsk:      #1A3A5C;   /* HSK level (dark navy)             */
   --badge-freq:     #1A5E28;   /* frequency (forest green)          */
