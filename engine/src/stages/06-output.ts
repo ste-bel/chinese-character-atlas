@@ -187,22 +187,43 @@ function writeHomepage(entries: Entry[]): void {
     entryCard("Books",      "📚", books,       "books",      "Classical and modern texts referenced throughout"),
   ].filter(Boolean).join("\n");
 
+  // Featured character (W0001 / 是 — the reference implementation)
+  const featuredWord = words.find(e => e.id === "W0001");
+  const featuredChar = featuredWord ? `
+<div class="hero-char">
+  <div class="hero-char-hanzi">${esc(featuredWord.hanzi ?? "是")}</div>
+  <div class="hero-char-pinyin">${esc(featuredWord.pinyin ?? "shì")}</div>
+  <div class="hero-char-meaning">TO BE · IS · CORRECT · AFFIRMATION</div>
+  <div class="hero-char-audio">
+    <button class="audio-btn banner-audio"
+            onclick="speak('${esc(featuredWord.hanzi ?? "是")}')"
+            aria-label="Pronounce ${esc(featuredWord.hanzi ?? "是")}">🔊 Listen</button>
+  </div>
+  <a href="${BASE}${featuredWord.url}" class="ls-btn" style="margin-top:var(--sp-3)">
+    Explore this character →
+  </a>
+</div>` : "";
+
   const body = `
 <div class="home-hero">
   <a href="${BASE}/people/P0001-stephane-belanger.html" class="home-seal" aria-label="About the author">
     <img src="${BASE}/assets/images/logo/fire-horse-seal.png"
-         alt="白朗志远 Fire Horse seal" width="140" height="140">
+         alt="白朗志远 Fire Horse seal" width="160" height="160">
   </a>
 
   <div class="home-chinese">漢字之美</div>
+  <div class="home-english">Chinese Character Atlas</div>
 
   <p class="home-motto">Every character tells a story.<br>Every story opens a civilization.</p>
 
   <p class="home-sub">
-    An interactive encyclopedia of Chinese language, characters,
-    history, culture, and usage — built for learners who want to understand
-    not just <em>what</em> Chinese means, but <em>why</em>.
+    A museum-quality encyclopedia of the Chinese language — characters,
+    words, history, culture, and the connections between them.
+    Built for learners who want to understand not just <em>what</em>
+    Chinese means, but <em>why</em>.
   </p>
+
+  <a href="${BASE}/lessons/" class="home-cta">Begin Exploring</a>
 
   <div class="home-stats">
     ${words.length      ? `<div class="home-stat"><div class="home-stat-num">${words.length}</div><div class="home-stat-label">Words</div></div>` : ""}
@@ -210,9 +231,22 @@ function writeHomepage(entries: Entry[]): void {
     ${components.length ? `<div class="home-stat"><div class="home-stat-num">${components.length}</div><div class="home-stat-label">Components</div></div>` : ""}
     ${lessons.length    ? `<div class="home-stat"><div class="home-stat-num">${lessons.length}</div><div class="home-stat-label">Lessons</div></div>` : ""}
   </div>
+</div>
 
-  <div class="home-entry-grid">
-    ${sections}
+<div class="home-section-rule">
+  <hr class="gold-rule">
+  <div class="home-section-label">Begin your exploration</div>
+</div>
+
+<div class="home-grid">
+  <div class="home-main-col">
+    <div class="home-entry-grid">
+      ${sections}
+    </div>
+  </div>
+  <div class="home-aside-col">
+    <div class="home-featured-label">Featured Character</div>
+    ${featuredChar}
   </div>
 </div>`;
 

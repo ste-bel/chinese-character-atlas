@@ -31,6 +31,11 @@ export interface LessonSidebar {
   allUrl: string;
 }
 
+export interface BreadcrumbItem {
+  label: string;
+  url?: string;
+}
+
 export interface PageContext extends PageMeta {
   lesson?: number;
   hsk?: number;
@@ -38,31 +43,90 @@ export interface PageContext extends PageMeta {
   stroke_count?: number;
   wordIndexInLesson?: number;   // 1-based
   sidebar?: LessonSidebar;
+  description?: string;         // for SEO meta description
+  breadcrumbs?: BreadcrumbItem[];
+  lessonTitle?: string;         // for breadcrumb display
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function freqLabel(rank: number): string {
-  // Express as fraction of 2000 most common words
   const denom = Math.round(2000 / rank);
   if (denom <= 0) return `#${rank}`;
   return `1 / ${denom.toLocaleString("en")}`;
+}
+
+function typeDir(type: string): string {
+  const map: Record<string, string> = {
+    word: "words", character: "characters", component: "components",
+    lesson: "lessons", grammar: "grammar", book: "books",
+    person: "people", idiom: "idioms", topic: "topics",
+  };
+  return map[type] ?? type + "s";
+}
+
+function typeLabel(type: string): string {
+  const map: Record<string, string> = {
+    word: "Words", character: "Characters", component: "Components",
+    lesson: "Lessons", grammar: "Grammar", book: "Books",
+    person: "People", idiom: "Idioms", topic: "Topics",
+  };
+  return map[type] ?? type;
+}
+
+// ── Breadcrumbs ───────────────────────────────────────────────────────────────
+
+function renderBreadcrumbs(ctx: PageContext): string {
+  const items: BreadcrumbItem[] = [{ label: "Home", url: `${BASE}/` }];
+
+  if (ctx.type) {
+    items.push({ label: typeLabel(ctx.type), url: `${BASE}/${typeDir(ctx.type)}/` });
+  }
+
+  if (ctx.sidebar && ctx.type === "word") {
+    items.push({
+      label: `Lesson ${ctx.sidebar.lessonNumber}`,
+      url: ctx.sidebar.allUrl,
+    });
+  }
+
+  if (ctx.id) {
+    items.push({ label: ctx.id });
+  }
+
+  if (items.length <= 2) return "";
+
+  const crumbs = items.map((item, i) => {
+    const isLast = i === items.length - 1;
+    if (isLast || !item.url) {
+      return `<span class="bc-current">${esc(item.label)}</span>`;
+    }
+    return `<a href="${esc(item.url)}" class="bc-link">${esc(item.label)}</a>`;
+  }).join(`<span class="bc-sep">›</span>`);
+
+  return `<nav class="breadcrumb" aria-label="Breadcrumb">${crumbs}</nav>`;
 }
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
 
 function renderSidebar(ctx: PageContext): string {
   if (!ctx.sidebar) {
+    const currentType = ctx.type ? typeDir(ctx.type) : null;
+    function navItem(label: string, dir: string, icon: string): string {
+      const active = currentType === dir ? ' class="active"' : "";
+      return `<li><a href="${BASE}/${dir}/"${active}><span class="sw-icon">${icon}</span>${esc(label)}</a></li>`;
+    }
     return `
 <nav class="sidebar-nav" aria-label="Atlas sections">
   <div class="sidebar-nav-title">Atlas</div>
   <ul>
-    <li><a href="${BASE}/"><span>🏠</span> Home</a></li>
-    <li><a href="${BASE}/lessons/"><span>📖</span> Lessons</a></li>
-    <li><a href="${BASE}/words/"><span>字</span> Words</a></li>
-    <li><a href="${BASE}/characters/"><span>文</span> Characters</a></li>
-    <li><a href="${BASE}/components/"><span>部</span> Components</a></li>
-    <li><a href="${BASE}/search.html"><span>🔍</span> Search</a></li>
+    <li><a href="${BASE}/"><span class="sw-icon">🏛</span>Home</a></li>
+    ${navItem("Lessons",    "lessons",    "📖")}
+    ${navItem("Words",      "words",      "字")}
+    ${navItem("Characters", "characters", "文")}
+    ${navItem("Components", "components", "部")}
+    <li><a href="${BASE}/books/"><span class="sw-icon">📚</span>Books</a></li>
+    <li><a href="${BASE}/search.html"><span class="sw-icon">🔍</span>Search</a></li>
   </ul>
 </nav>`;
   }
@@ -108,7 +172,7 @@ function renderEntryBanner(ctx: PageContext): string {
   if (!ctx.hanzi) return "";
 
   const isWord      = ctx.type === "word";
-  const typeLabel   = isWord ? "WORD" : "CHARACTER";
+  const typeLabel_  = isWord ? "WORD" : "CHARACTER";
   const numDisplay  = isWord ? (ctx.wordIndexInLesson ?? "") : "";
 
   const hskBadge  = ctx.hsk
@@ -121,16 +185,16 @@ function renderEntryBanner(ctx: PageContext): string {
     ? `<span class="badge badge-type">${esc(ctx.type)}</span>` : "";
 
   const strokeMeta = ctx.stroke_count
-    ? `<span>Strokes: ${ctx.stroke_count}</span>` : "";
+    ? `<span class="eb-stroke">Strokes: ${ctx.stroke_count}</span>` : "";
 
   const audioChar = `<button class="audio-btn banner-audio" onclick="speak('${esc(ctx.hanzi)}')" aria-label="Pronounce ${esc(ctx.hanzi)}">🔊</button>`;
   const audioPy   = ctx.pinyin
     ? `<button class="audio-btn" onclick="speak('${esc(ctx.pinyin)}')" aria-label="Pronounce ${esc(ctx.pinyin)}">🔊</button>` : "";
 
   return `
-<div class="entry-banner" aria-label="${esc(typeLabel)} entry for ${esc(ctx.hanzi ?? "")}">
+<div class="entry-banner" aria-label="${esc(typeLabel_)} entry for ${esc(ctx.hanzi ?? "")}">
   <div class="eb-label">
-    <span class="eb-type">${typeLabel}</span>
+    <span class="eb-type">${typeLabel_}</span>
     <span class="eb-num">${numDisplay}</span>
   </div>
   <div class="eb-hanzi-block">
@@ -158,10 +222,24 @@ function renderEntryBanner(ctx: PageContext): string {
 </div>`;
 }
 
+// ── SEO helpers ───────────────────────────────────────────────────────────────
+
+function buildDescription(title: string, ctx: PageContext): string {
+  if (ctx.description) return ctx.description;
+  const parts: string[] = [];
+  if (ctx.hanzi && ctx.pinyin) {
+    parts.push(`${ctx.hanzi} (${ctx.pinyin})`);
+  }
+  parts.push(title);
+  if (ctx.type === "word") parts.push("— Chinese Character Atlas");
+  if (ctx.type === "character") parts.push("— character etymology, evolution, and usage");
+  return parts.join(" ").slice(0, 160);
+}
+
 // ── Page shell ────────────────────────────────────────────────────────────────
 
 export function page(title: string, body: string, ctx: PageContext = {}): string {
-  const metaTags = [
+  const pagefindMeta = [
     ctx.id     ? `<meta data-pagefind-meta="id"     content="${esc(ctx.id)}">` : "",
     ctx.type   ? `<meta data-pagefind-meta="type"   content="${esc(ctx.type)}">` : "",
     ctx.hanzi  ? `<meta data-pagefind-meta="hanzi"  content="${esc(ctx.hanzi)}">` : "",
@@ -170,10 +248,16 @@ export function page(title: string, body: string, ctx: PageContext = {}): string
 
   const hasEntryBanner = (ctx.type === "word" || ctx.type === "character") && !!ctx.hanzi;
   const entryBanner    = hasEntryBanner ? renderEntryBanner(ctx) : "";
+  const breadcrumbs    = hasEntryBanner ? renderBreadcrumbs(ctx) : "";
 
   const pageTitle = title === "Chinese Character Atlas"
-    ? title
+    ? "Chinese Character Atlas · 漢字之美"
     : `${esc(title)} · Chinese Character Atlas`;
+
+  const description = buildDescription(title, ctx);
+  const canonicalPath = ctx.id && ctx.type
+    ? `${BASE}/${typeDir(ctx.type)}/${ctx.id}`
+    : `${BASE}/`;
 
   const wordUrlsJson = ctx.sidebar
     ? JSON.stringify(ctx.sidebar.items.map(i => ({ id: i.id, url: i.url })))
@@ -197,32 +281,54 @@ export function page(title: string, body: string, ctx: PageContext = {}): string
 <meta charset="utf-8">
 <title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="${esc(description)}">
+<meta name="language" content="en">
+<meta property="og:title" content="${esc(pageTitle)}">
+<meta property="og:description" content="${esc(description)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Chinese Character Atlas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="${esc(pageTitle)}">
+<meta name="twitter:description" content="${esc(description)}">
+<link rel="canonical" href="https://ste-bel.github.io${canonicalPath}">
 <link rel="stylesheet" href="${BASE}/assets/css/style.css">
 <script src="${BASE}/assets/js/audio.js" defer></script>
 <script src="${BASE}/assets/js/atlas.js" defer></script>
-${metaTags ? `    ${metaTags}` : ""}
+${pagefindMeta ? `    ${pagefindMeta}` : ""}
 </head>
 <body>
 
 <header class="site-header" data-pagefind-ignore>
+  <div class="header-top-rule" aria-hidden="true"></div>
   <div class="header-inner">
-    <div class="header-brand">
-      <a href="${BASE}/" class="header-logo" aria-label="Chinese Character Atlas — Home">
-        <img src="${BASE}/assets/images/logo/fire-horse-seal.png"
-             alt="白朗志远 Fire Horse seal" width="40" height="40">
-      </a>
-      <div class="header-title">
-        <div class="header-title-chinese">漢字之美</div>
-        <div class="header-title-english">The Beauty of Chinese Characters</div>
+    <a href="${BASE}/" class="header-brand" aria-label="Chinese Character Atlas — Home">
+      <img src="${BASE}/assets/images/logo/fire-horse-seal-64.png"
+           alt="Fire Horse seal — site logo" width="44" height="44" class="header-seal">
+      <div class="header-identity">
+        <div class="header-hanzi">漢字之美</div>
+        <div class="header-subtitle">Chinese Character Atlas</div>
       </div>
-    </div>
-    <div class="header-tagline">A Journey Through Language, History &amp; Culture</div>
+    </a>
     <nav class="header-nav" aria-label="Site navigation">
-      <a href="${BASE}/"><span class="nav-icon">🏠</span>Home</a>
-      <a href="${BASE}/words/"><span class="nav-icon">☰</span>Index</a>
-      <a href="${BASE}/search.html"><span class="nav-icon">🔍</span>Search</a>
-      <a href="${BASE}/people/P0001-stephane-belanger.html"><span class="nav-icon">◉</span>About</a>
+      <a href="${BASE}/" class="nav-item">Home</a>
+      <a href="${BASE}/lessons/" class="nav-item">Lessons</a>
+      <a href="${BASE}/words/" class="nav-item">Words</a>
+      <a href="${BASE}/characters/" class="nav-item">Characters</a>
+      <a href="${BASE}/search.html" class="nav-item">Search</a>
+      <a href="${BASE}/people/P0001-stephane-belanger.html" class="nav-item nav-about">About</a>
     </nav>
+    <button class="header-menu-btn" aria-label="Open navigation menu" onclick="toggleMenu(this)">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="header-mobile-nav" id="mobile-nav" aria-hidden="true">
+    <a href="${BASE}/">Home</a>
+    <a href="${BASE}/lessons/">Lessons</a>
+    <a href="${BASE}/words/">Words</a>
+    <a href="${BASE}/characters/">Characters</a>
+    <a href="${BASE}/components/">Components</a>
+    <a href="${BASE}/search.html">Search</a>
+    <a href="${BASE}/people/P0001-stephane-belanger.html">About</a>
   </div>
 </header>
 
@@ -231,6 +337,7 @@ ${metaTags ? `    ${metaTags}` : ""}
     ${renderSidebar(ctx)}
   </aside>
   <main data-pagefind-body>
+    ${breadcrumbs}
     ${entryBanner}
     <div class="entry-body ${hasEntryBanner ? "is-entry" : ""}">
       ${body}
@@ -241,12 +348,58 @@ ${metaTags ? `    ${metaTags}` : ""}
 ${bottomBar}
 
 <footer class="site-footer" data-pagefind-ignore>
+  <div class="footer-rule" aria-hidden="true"></div>
   <div class="footer-inner">
-    <p>© 2026 Stéphane Bélanger · 白朗志远 · Chinese Character Atlas</p>
-    <p>Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>
-     · Engine: <a href="https://opensource.org/licenses/MIT">MIT</a></p>
+    <div class="footer-brand">
+      <img src="${BASE}/assets/images/logo/fire-horse-seal-64.png"
+           alt="Fire Horse seal" width="48" height="48" class="footer-seal">
+      <div class="footer-brand-text">
+        <div class="footer-title">漢字之美</div>
+        <div class="footer-tagline">Chinese Character Atlas</div>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <div class="footer-nav-col">
+        <div class="footer-nav-head">Explore</div>
+        <a href="${BASE}/lessons/">Lessons</a>
+        <a href="${BASE}/words/">Words</a>
+        <a href="${BASE}/characters/">Characters</a>
+        <a href="${BASE}/components/">Components</a>
+      </div>
+      <div class="footer-nav-col">
+        <div class="footer-nav-head">Atlas</div>
+        <a href="${BASE}/books/">Books</a>
+        <a href="${BASE}/search.html">Search</a>
+        <a href="${BASE}/people/P0001-stephane-belanger.html">About</a>
+        <a href="https://github.com/ste-bel/chinese-character-atlas">GitHub</a>
+      </div>
+    </nav>
+    <div class="footer-info">
+      <div class="footer-info-head">Chinese Character Atlas</div>
+      <p>A museum-quality encyclopedia of Chinese language, history, and culture.</p>
+      <p class="footer-author">Curated by 白朗志远<br>Stéphane Bélanger</p>
+      <p class="footer-license">
+        Content: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a><br>
+        Engine: <a href="https://opensource.org/licenses/MIT">MIT</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 白朗志远 · Stéphane Bélanger</span>
+    <span class="footer-bottom-sep">·</span>
+    <span>Chinese Character Atlas</span>
   </div>
 </footer>
+
+<script>
+function toggleMenu(btn) {
+  const nav = document.getElementById('mobile-nav');
+  const open = nav.getAttribute('aria-hidden') === 'false';
+  nav.setAttribute('aria-hidden', open ? 'true' : 'false');
+  btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+  btn.classList.toggle('open', !open);
+}
+</script>
 
 </body>
 </html>`;
