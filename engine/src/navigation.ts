@@ -3,12 +3,15 @@
 
 export function navigation() {
 return `
-<nav class="card">
-<a href="/chinese-character-atlas/">Home</a> ·
-<a href="/chinese-character-atlas/lessons/">Lessons</a> ·
-<a href="/chinese-character-atlas/words/">Words</a> ·
-<a href="/chinese-character-atlas/characters/">Characters</a> ·
-<a href="/chinese-character-atlas/components/">Components</a> ·
-<a href="/chinese-character-atlas/search.html">Search</a>
+<nav class="sidebar-nav" aria-label="Atlas sections">
+  <div class="sidebar-nav-title">Atlas</div>
+  <ul>
+    <li><a href="/chinese-character-atlas/">🏠 Home</a></li>
+    <li><a href="/chinese-character-atlas/lessons/">📖 Lessons</a></li>
+    <li><a href="/chinese-character-atlas/words/">字 Words</a></li>
+    <li><a href="/chinese-character-atlas/characters/">文 Characters</a></li>
+    <li><a href="/chinese-character-atlas/components/">部 Components</a></li>
+    <li><a href="/chinese-character-atlas/search.html">🔍 Search</a></li>
+  </ul>
 </nav>`;
 }
