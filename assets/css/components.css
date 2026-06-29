@@ -905,14 +905,17 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
   .entry-banner {
     animation: atlas-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
   }
-  .entry-body > .section-card {
-    animation: atlas-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  /* Exhibits reveal as they scroll into view (walking deeper into the museum).
+     Pending state applies only when JS is active (html.js, set pre-paint) so
+     no-JS visitors always see content; .is-in is added by the observer. */
+  html.js .entry-body > .section-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
   }
-  .entry-body > .section-card:nth-of-type(1) { animation-delay: 0.06s; }
-  .entry-body > .section-card:nth-of-type(2) { animation-delay: 0.12s; }
-  .entry-body > .section-card:nth-of-type(3) { animation-delay: 0.18s; }
-  .entry-body > .section-card:nth-of-type(4) { animation-delay: 0.24s; }
-  .entry-body > .section-card:nth-of-type(n+5) { animation-delay: 0.30s; }
+  html.js .entry-body > .section-card.is-in { opacity: 1; transform: none; }
 
   /* Homepage: a calm entrance for the threshold. */
   .home-hero > * { animation: atlas-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }

@@ -296,6 +296,7 @@ export function page(title: string, body: string, ctx: PageContext = {}): string
 <html lang="en" id="top">
 <head>
 <meta charset="utf-8">
+<script>document.documentElement.classList.add('js')</script>
 <title>${pageTitle}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="${esc(description)}">
