@@ -1,0 +1,558 @@
+[
+  {
+    "id": "B0001",
+    "type": "book",
+    "hanzi": null,
+    "pinyin": "jiè zǐ shū",
+    "title": "诫子书",
+    "source": "atlas/books/B0001-admonitions-to-my-son.md",
+    "url": "/books/B0001-admonitions-to-my-son.html",
+    "linksTo": []
+  },
+  {
+    "id": "CH0001",
+    "type": "character",
+    "hanzi": "是",
+    "pinyin": "shì",
+    "title": "The Character 是",
+    "source": "atlas/characters/CH0001-是.md",
+    "url": "/characters/CH0001-是.html",
+    "linksTo": []
+  },
+  {
+    "id": "CH0002",
+    "type": "character",
+    "hanzi": "的",
+    "pinyin": "de / dí / dì",
+    "title": "The Character 的",
+    "source": "atlas/characters/CH0002-的.md",
+    "url": "/characters/CH0002-的.html",
+    "linksTo": [
+      "W0002"
+    ]
+  },
+  {
+    "id": "CH0003",
+    "type": "character",
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "title": "The Character 我",
+    "source": "atlas/characters/CH0003-我.md",
+    "url": "/characters/CH0003-我.html",
+    "linksTo": [
+      "W0003"
+    ]
+  },
+  {
+    "id": "CH0004",
+    "type": "character",
+    "hanzi": "不",
+    "pinyin": "bù",
+    "title": "The Character 不",
+    "source": "atlas/characters/CH0004-不.md",
+    "url": "/characters/CH0004-不.html",
+    "linksTo": [
+      "W0004"
+    ]
+  },
+  {
+    "id": "CH0005",
+    "type": "character",
+    "hanzi": "了",
+    "pinyin": "le",
+    "title": "The Character 了",
+    "source": "atlas/characters/CH0005-了.md",
+    "url": "/characters/CH0005-了.html",
+    "linksTo": [
+      "W0005"
+    ]
+  },
+  {
+    "id": "CH0006",
+    "type": "character",
+    "hanzi": "人",
+    "pinyin": "rén",
+    "title": "The Character 人",
+    "source": "atlas/characters/CH0006-人.md",
+    "url": "/characters/CH0006-人.html",
+    "linksTo": [
+      "W0006"
+    ]
+  },
+  {
+    "id": "CH0007",
+    "type": "character",
+    "hanzi": "在",
+    "pinyin": "zài",
+    "title": "The Character 在",
+    "source": "atlas/characters/CH0007-在.md",
+    "url": "/characters/CH0007-在.html",
+    "linksTo": [
+      "W0007"
+    ]
+  },
+  {
+    "id": "CH0008",
+    "type": "character",
+    "hanzi": "有",
+    "pinyin": "yǒu",
+    "title": "The Character 有",
+    "source": "atlas/characters/CH0008-有.md",
+    "url": "/characters/CH0008-有.html",
+    "linksTo": [
+      "W0008"
+    ]
+  },
+  {
+    "id": "CH0009",
+    "type": "character",
+    "hanzi": "他",
+    "pinyin": "tā",
+    "title": "The Character 他",
+    "source": "atlas/characters/CH0009-他.md",
+    "url": "/characters/CH0009-他.html",
+    "linksTo": [
+      "W0009"
+    ]
+  },
+  {
+    "id": "CH0010",
+    "type": "character",
+    "hanzi": "这",
+    "pinyin": "zhè",
+    "title": "The Character 这",
+    "source": "atlas/characters/CH0010-这.md",
+    "url": "/characters/CH0010-这.html",
+    "linksTo": [
+      "W0010"
+    ]
+  },
+  {
+    "id": "CH0011",
+    "type": "character",
+    "hanzi": "中",
+    "pinyin": "zhōng",
+    "title": "The Character 中",
+    "source": "atlas/characters/CH0011-中.md",
+    "url": "/characters/CH0011-中.html",
+    "linksTo": [
+      "W0011"
+    ]
+  },
+  {
+    "id": "CH0012",
+    "type": "character",
+    "hanzi": "来",
+    "pinyin": "lái",
+    "title": "The Character 来",
+    "source": "atlas/characters/CH0012-来.md",
+    "url": "/characters/CH0012-来.html",
+    "linksTo": [
+      "W0012"
+    ]
+  },
+  {
+    "id": "CH0013",
+    "type": "character",
+    "hanzi": "上",
+    "pinyin": "shàng",
+    "title": "The Character 上",
+    "source": "atlas/characters/CH0013-上.md",
+    "url": "/characters/CH0013-上.html",
+    "linksTo": [
+      "W0013"
+    ]
+  },
+  {
+    "id": "CH0014",
+    "type": "character",
+    "hanzi": "国",
+    "pinyin": "guó",
+    "title": "The Character 国",
+    "source": "atlas/characters/CH0014-国.md",
+    "url": "/characters/CH0014-国.html",
+    "linksTo": [
+      "W0014"
+    ]
+  },
+  {
+    "id": "CH0015",
+    "type": "character",
+    "hanzi": "你",
+    "pinyin": "nǐ",
+    "title": "The Character 你",
+    "source": "atlas/characters/CH0015-你.md",
+    "url": "/characters/CH0015-你.html",
+    "linksTo": [
+      "W0015"
+    ]
+  },
+  {
+    "id": "CH0016",
+    "type": "character",
+    "hanzi": "们",
+    "pinyin": "men",
+    "title": "The Character 们",
+    "source": "atlas/characters/CH0016-们.md",
+    "url": "/characters/CH0016-们.html",
+    "linksTo": [
+      "W0016"
+    ]
+  },
+  {
+    "id": "CH0017",
+    "type": "character",
+    "hanzi": "说",
+    "pinyin": "shuō",
+    "title": "The Character 说",
+    "source": "atlas/characters/CH0017-说.md",
+    "url": "/characters/CH0017-说.html",
+    "linksTo": [
+      "W0017"
+    ]
+  },
+  {
+    "id": "CH0018",
+    "type": "character",
+    "hanzi": "大",
+    "pinyin": "dà",
+    "title": "The Character 大",
+    "source": "atlas/characters/CH0018-大.md",
+    "url": "/characters/CH0018-大.html",
+    "linksTo": [
+      "W0018"
+    ]
+  },
+  {
+    "id": "CH0019",
+    "type": "character",
+    "hanzi": "也",
+    "pinyin": "yě",
+    "title": "The Character 也",
+    "source": "atlas/characters/CH0019-也.md",
+    "url": "/characters/CH0019-也.html",
+    "linksTo": [
+      "W0019"
+    ]
+  },
+  {
+    "id": "CH0020",
+    "type": "character",
+    "hanzi": "为",
+    "pinyin": "wéi",
+    "title": "The Character 为",
+    "source": "atlas/characters/CH0020-为.md",
+    "url": "/characters/CH0020-为.html",
+    "linksTo": [
+      "W0020"
+    ]
+  },
+  {
+    "id": "CMP0001",
+    "type": "component",
+    "hanzi": "日",
+    "pinyin": "rì",
+    "title": "Sun and Day",
+    "source": "atlas/components/CMP0001-日.md",
+    "url": "/components/CMP0001-日.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0002",
+    "type": "component",
+    "hanzi": "人",
+    "pinyin": "rén",
+    "title": "Person",
+    "source": "atlas/components/CMP0002-人.md",
+    "url": "/components/CMP0002-人.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0003",
+    "type": "component",
+    "hanzi": "口",
+    "pinyin": "kǒu",
+    "title": "Mouth",
+    "source": "atlas/components/CMP0003-口.md",
+    "url": "/components/CMP0003-口.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0004",
+    "type": "component",
+    "hanzi": "月",
+    "pinyin": "yuè",
+    "title": "Moon and Month",
+    "source": "atlas/components/CMP0004-月.md",
+    "url": "/components/CMP0004-月.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0005",
+    "type": "component",
+    "hanzi": "土",
+    "pinyin": "tǔ",
+    "title": "Earth and Soil",
+    "source": "atlas/components/CMP0005-土.md",
+    "url": "/components/CMP0005-土.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0006",
+    "type": "component",
+    "hanzi": "大",
+    "pinyin": "dà",
+    "title": "Big and Great",
+    "source": "atlas/components/CMP0006-大.md",
+    "url": "/components/CMP0006-大.html",
+    "linksTo": []
+  },
+  {
+    "id": "CMP0007",
+    "type": "component",
+    "hanzi": "言",
+    "pinyin": "yán",
+    "title": "Speech and Words",
+    "source": "atlas/components/CMP0007-言.md",
+    "url": "/components/CMP0007-言.html",
+    "linksTo": []
+  },
+  {
+    "id": "L0001",
+    "type": "lesson",
+    "hanzi": null,
+    "pinyin": null,
+    "title": "The First 20 Words",
+    "source": "atlas/lessons/L0001-first-20-words.md",
+    "url": "/lessons/L0001-first-20-words.html",
+    "linksTo": [
+      "W0001",
+      "W0004",
+      "W0002",
+      "W0005",
+      "W0008",
+      "W0007"
+    ]
+  },
+  {
+    "id": "P0001",
+    "type": "person",
+    "hanzi": "白朗志远",
+    "pinyin": "Bái Lǎng Zhì Yuǎn",
+    "title": "Stéphane Bélanger · 白朗志远",
+    "source": "atlas/people/P0001-stephane-belanger.md",
+    "url": "/people/P0001-stephane-belanger.html",
+    "linksTo": [
+      "B0001"
+    ]
+  },
+  {
+    "id": "W0001",
+    "type": "word",
+    "hanzi": "是",
+    "pinyin": "shì",
+    "title": "To Be; Is; Correct",
+    "source": "atlas/words/W0001-是.md",
+    "url": "/words/W0001-是.html",
+    "linksTo": [
+      "CMP0001",
+      "CH0001"
+    ]
+  },
+  {
+    "id": "W0002",
+    "type": "word",
+    "hanzi": "的",
+    "pinyin": "de",
+    "title": "The Particle of Possession",
+    "source": "atlas/words/W0002-的.md",
+    "url": "/words/W0002-的.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0003",
+    "type": "word",
+    "hanzi": "我",
+    "pinyin": "wǒ",
+    "title": "I, Me",
+    "source": "atlas/words/W0003-我.md",
+    "url": "/words/W0003-我.html",
+    "linksTo": [
+      "W0016"
+    ]
+  },
+  {
+    "id": "W0004",
+    "type": "word",
+    "hanzi": "不",
+    "pinyin": "bù",
+    "title": "Not, No",
+    "source": "atlas/words/W0004-不.md",
+    "url": "/words/W0004-不.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0005",
+    "type": "word",
+    "hanzi": "了",
+    "pinyin": "le",
+    "title": "The Completion Particle",
+    "source": "atlas/words/W0005-了.md",
+    "url": "/words/W0005-了.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0006",
+    "type": "word",
+    "hanzi": "人",
+    "pinyin": "rén",
+    "title": "Person, People",
+    "source": "atlas/words/W0006-人.md",
+    "url": "/words/W0006-人.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0007",
+    "type": "word",
+    "hanzi": "在",
+    "pinyin": "zài",
+    "title": "At, In, On — To Be Present",
+    "source": "atlas/words/W0007-在.md",
+    "url": "/words/W0007-在.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0008",
+    "type": "word",
+    "hanzi": "有",
+    "pinyin": "yǒu",
+    "title": "To Have; There Is",
+    "source": "atlas/words/W0008-有.md",
+    "url": "/words/W0008-有.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0009",
+    "type": "word",
+    "hanzi": "他",
+    "pinyin": "tā",
+    "title": "He, Him",
+    "source": "atlas/words/W0009-他.md",
+    "url": "/words/W0009-他.html",
+    "linksTo": [
+      "W0016"
+    ]
+  },
+  {
+    "id": "W0010",
+    "type": "word",
+    "hanzi": "这",
+    "pinyin": "zhè",
+    "title": "This",
+    "source": "atlas/words/W0010-这.md",
+    "url": "/words/W0010-这.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0011",
+    "type": "word",
+    "hanzi": "中",
+    "pinyin": "zhōng",
+    "title": "Middle; China",
+    "source": "atlas/words/W0011-中.md",
+    "url": "/words/W0011-中.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0012",
+    "type": "word",
+    "hanzi": "来",
+    "pinyin": "lái",
+    "title": "To Come",
+    "source": "atlas/words/W0012-来.md",
+    "url": "/words/W0012-来.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0013",
+    "type": "word",
+    "hanzi": "上",
+    "pinyin": "shàng",
+    "title": "Above, On, Up",
+    "source": "atlas/words/W0013-上.md",
+    "url": "/words/W0013-上.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0014",
+    "type": "word",
+    "hanzi": "国",
+    "pinyin": "guó",
+    "title": "Country, Nation",
+    "source": "atlas/words/W0014-国.md",
+    "url": "/words/W0014-国.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0015",
+    "type": "word",
+    "hanzi": "你",
+    "pinyin": "nǐ",
+    "title": "You (Singular)",
+    "source": "atlas/words/W0015-你.md",
+    "url": "/words/W0015-你.html",
+    "linksTo": [
+      "W0016"
+    ]
+  },
+  {
+    "id": "W0016",
+    "type": "word",
+    "hanzi": "们",
+    "pinyin": "men",
+    "title": "Plural Suffix",
+    "source": "atlas/words/W0016-们.md",
+    "url": "/words/W0016-们.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0017",
+    "type": "word",
+    "hanzi": "说",
+    "pinyin": "shuō",
+    "title": "To Speak, To Say",
+    "source": "atlas/words/W0017-说.md",
+    "url": "/words/W0017-说.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0018",
+    "type": "word",
+    "hanzi": "大",
+    "pinyin": "dà",
+    "title": "Big, Large, Great",
+    "source": "atlas/words/W0018-大.md",
+    "url": "/words/W0018-大.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0019",
+    "type": "word",
+    "hanzi": "也",
+    "pinyin": "yě",
+    "title": "Also, Too, As Well",
+    "source": "atlas/words/W0019-也.md",
+    "url": "/words/W0019-也.html",
+    "linksTo": []
+  },
+  {
+    "id": "W0020",
+    "type": "word",
+    "hanzi": "为",
+    "pinyin": "wéi",
+    "title": "To Be; For; Because Of",
+    "source": "atlas/words/W0020-为.md",
+    "url": "/words/W0020-为.html",
+    "linksTo": []
+  }
+]

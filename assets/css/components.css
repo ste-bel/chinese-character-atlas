@@ -1,0 +1,959 @@
+/* ═══════════════════════════════════════════════════════════════════
+   COMPONENTS — Cards, banners, badges, buttons, atlas-notes, etc.
+   Tokens in tokens.css. Layout in layout.css.
+═══════════════════════════════════════════════════════════════════ */
+
+/* ── Card ─────────────────────────────────────────────────────────── */
+.card {
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad);
+  box-shadow: var(--shadow-card);
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+
+/* Card grid — 2 columns by default (used by index/summary contexts) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--card-gap);
+  margin-bottom: var(--card-gap);
+}
+.card-grid .card-full { grid-column: 1 / -1; }
+
+/* ── Section card (museum information panel) ───────────────────────────
+   Each entry section becomes a self-contained panel, stacked vertically at
+   a comfortable reading width — the infographic's card identity applied to
+   long-form content. */
+.section-card {
+  position: relative;
+  margin: 0 0 var(--rhythm);
+  padding: var(--sp-6) var(--sp-8) var(--sp-8);
+  scroll-margin-top: 88px;
+  transition: box-shadow var(--ease), border-color var(--ease);
+}
+.section-card:hover { border-color: var(--border-warm); }
+.section-card:last-child { margin-bottom: 0; }
+
+/* Full-width feature panels (Examples, Grammar, Historical Evolution) get a
+   touch more presence and a warm gold hairline at the top. */
+.section-card.card-feature {
+  padding: var(--sp-8);
+  margin: var(--rhythm-loose) 0;
+  background:
+    linear-gradient(var(--paper-card), var(--paper-card)) padding-box,
+    var(--paper-card);
+  border-top: 3px solid var(--gold-rule);
+}
+
+/* Quiet panels (References, Related, Linked From) recede slightly. */
+.section-card.card-quiet {
+  background: linear-gradient(180deg, var(--paper-card), var(--paper-warm) 220%);
+  box-shadow: none;
+}
+
+/* ── Card section header ──────────────────────────────────────────── */
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 1px solid var(--border-light);
+}
+.section-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--crimson);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  flex-shrink: 0;
+  line-height: 1;
+  box-shadow: 0 2px 5px rgba(139, 26, 26, 0.35);
+}
+.section-icon {
+  font-size: 17px;
+  color: var(--gold-mid);
+  line-height: 1;
+  flex-shrink: 0;
+}
+.section-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--ink-mid);
+  margin: 0;
+}
+
+/* Constrain prose inside a panel to a comfortable measure; tables and the
+   evolution timeline opt out and use the full panel width. */
+.card-body > * { max-width: var(--measure); }
+.card-body > .evolution-grid,
+.card-body > .table-wrap,
+.card-body > table,
+.card-body > .example-block { max-width: none; }
+
+/* Warning card variant (Common Mistakes) */
+.card-warning {
+  border-left: 4px solid var(--crimson-bright);
+}
+.card-warning .section-num { background: var(--crimson-bright); box-shadow: 0 2px 5px rgba(192,57,43,0.35); }
+.card-warning .section-icon { color: var(--crimson-bright); }
+
+/* ── Word / Character banner (the hero) ───────────────────────────────
+   The defining element of every entry page. The Hanzi must dominate the
+   first screen — the visitor sees the character before reading anything. */
+.entry-banner {
+  display: flex;
+  align-items: stretch;
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  margin-bottom: var(--rhythm-loose);
+  overflow: hidden;
+  box-shadow: var(--shadow-hover);
+  min-height: clamp(200px, 30vh, 280px);
+}
+
+/* Left label strip */
+.eb-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(165deg, #5E0F0F 0%, var(--crimson-header) 100%);
+  color: #fff;
+  padding: var(--sp-5) var(--sp-4);
+  min-width: 76px;
+  flex-shrink: 0;
+  gap: var(--sp-2);
+}
+.eb-type {
+  font-family: var(--font-ui);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  line-height: 1;
+}
+.eb-num {
+  font-family: var(--font-ui);
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1;
+  color: #fff;
+}
+
+/* Large hanzi block — the focal point */
+.eb-hanzi-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-6) var(--sp-10);
+  border-right: 1px solid var(--border-light);
+  flex-shrink: 0;
+  gap: var(--sp-3);
+  background:
+    radial-gradient(ellipse at center,
+      rgba(232, 208, 144, 0.18) 0%, rgba(255, 254, 246, 0) 70%),
+    linear-gradient(180deg, var(--paper-card) 0%, var(--paper-warm) 100%);
+}
+.eb-hanzi {
+  font-family: var(--font-hanzi);
+  font-size: clamp(96px, 13vw, 168px);
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: var(--ls-tight);
+  text-shadow: 0 2px 3px rgba(26, 14, 8, 0.08);
+}
+
+/* Info block (pinyin + badges + meta) */
+.eb-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-6) var(--sp-8);
+  flex: 1;
+  min-width: 0;
+}
+.eb-pinyin-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-3);
+}
+.eb-pinyin {
+  font-family: var(--font-body);
+  font-size: clamp(28px, 4vw, 42px);
+  font-style: italic;
+  color: var(--crimson-mid);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+/* Museum object label — the curator names the work: reading, then meaning. */
+.eb-gloss {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--ink-mid);
+  line-height: var(--lh-snug);
+  max-width: 38ch;
+}
+.eb-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+.eb-meta {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  color: var(--ink-light);
+  letter-spacing: 0.03em;
+  display: flex;
+  gap: var(--sp-5);
+}
+
+/* Quick audio panel */
+.eb-quick-audio {
+  flex-shrink: 0;
+  width: 172px;
+  border-left: 1px solid var(--border-light);
+  background: linear-gradient(135deg, var(--paper-warm) 0%, var(--paper) 100%);
+  padding: var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+.qa-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--crimson);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border-light);
+}
+.eb-quick-audio ul { list-style: none; display: flex; flex-direction: column; gap: var(--sp-3); }
+.eb-quick-audio li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-mid);
+}
+.eb-quick-audio .ql-hanzi { font-family: var(--font-hanzi); font-size: var(--text-lg); }
+.eb-quick-audio .ql-label { font-size: var(--text-sm); color: var(--ink-light); font-style: italic; }
+
+/* Banner stacks on narrow screens — nothing removed, layout reflows */
+@media (max-width: 720px) {
+  .entry-banner { flex-wrap: wrap; min-height: 0; }
+  .eb-label { flex-direction: row; gap: var(--sp-3); min-width: 0; width: 100%; padding: var(--sp-3) var(--sp-5); justify-content: flex-start; }
+  .eb-num { font-size: 24px; }
+  .eb-hanzi-block { border-right: none; border-bottom: 1px solid var(--border-light); flex: 1; padding: var(--sp-6); }
+  .eb-info { flex-basis: 100%; }
+  .eb-quick-audio { width: 100%; border-left: none; border-top: 1px solid var(--border-light); }
+}
+
+/* ── Badges ───────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  padding: 5px 11px;
+  border-radius: var(--badge-radius);
+  line-height: 1;
+  background: var(--crimson);
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(26, 14, 8, 0.12);
+}
+.badge-hsk       { background: var(--badge-hsk); }
+.badge-freq      { background: var(--badge-freq); }
+.badge-essential { background: var(--badge-essential); }
+.badge-type      { background: var(--badge-type); }
+.badge-id        { background: var(--ink-light); }
+
+/* ── Audio button ─────────────────────────────────────────────────── */
+button.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--ink-light);
+  line-height: 1;
+  transition: border-color var(--ease), color var(--ease), background var(--ease);
+  vertical-align: middle;
+}
+button.audio-btn:hover {
+  border-color: var(--crimson);
+  color: var(--crimson);
+  background: rgba(139, 26, 26, 0.05);
+}
+button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
+
+/* ── Atlas Note ───────────────────────────────────────────────────────
+   The Atlas's signature callout — a gold-framed manuscript aside, instantly
+   recognizable, set apart from the surrounding exhibit prose. */
+.atlas-note {
+  position: relative;
+  border: 1px solid var(--gold-mid);
+  border-radius: var(--card-radius);
+  background:
+    linear-gradient(135deg,
+      rgba(232, 208, 144, 0.28) 0%,
+      rgba(255, 254, 246, 0.92) 55%);
+  padding: var(--sp-6) var(--sp-8) var(--sp-6) var(--sp-10);
+  margin: var(--rhythm) 0;
+  box-shadow: var(--shadow-card);
+  max-width: var(--measure) !important;
+}
+/* Gilded spine */
+.atlas-note::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  border-radius: var(--card-radius) 0 0 var(--card-radius);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-rule) 50%, var(--gold-mid));
+}
+.atlas-note-head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+.atlas-note-diamond {
+  color: var(--gold-rule);
+  font-size: 15px;
+  line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(120, 90, 20, 0.3));
+}
+.atlas-note-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--gold-mid);
+}
+/* Hairline trailing the label */
+.atlas-note-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-rule), transparent);
+}
+.atlas-note-body {
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-mid);
+}
+.atlas-note-body p { margin-bottom: var(--sp-3); max-width: none; }
+.atlas-note-body p:last-child { margin-bottom: 0; }
+
+/* ── Historical evolution timeline ────────────────────────────────── */
+.evolution-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0;
+  text-align: center;
+}
+.evolution-stage {
+  padding: var(--sp-4) var(--sp-3);
+  border-right: 1px solid var(--border-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.evolution-stage:last-child { border-right: none; }
+.evo-script {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--crimson);
+}
+.evo-date {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+}
+.evo-char {
+  font-family: var(--font-hanzi);
+  font-size: 36px;
+  color: var(--ink);
+  line-height: 1;
+}
+.evo-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+/* ── Example blocks ───────────────────────────────────────────────── */
+.example-block {
+  border-left: 3px solid var(--border);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
+  transition: border-color var(--ease);
+}
+.example-block:hover { border-left-color: var(--crimson); }
+.example-block:last-child { margin-bottom: 0; }
+
+.example-num {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--crimson);
+  margin-bottom: var(--sp-1);
+}
+.example-chinese {
+  font-family: var(--font-hanzi);
+  font-size: var(--text-md);
+  color: var(--ink);
+  margin-bottom: var(--sp-1);
+  line-height: 1.5;
+}
+.example-pinyin {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--ink-light);
+  margin-bottom: var(--sp-1);
+}
+.example-english { font-size: var(--text-sm); color: var(--ink-mid); }
+.example-literal {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--ink-faint);
+  margin-top: var(--sp-1);
+}
+
+/* ── Correct / Incorrect markers ──────────────────────────────────── */
+.mark-correct   { color: #1A5E28; font-weight: 700; }
+.mark-incorrect { color: var(--crimson-bright); font-weight: 700; }
+
+/* ── Component composition diagram ───────────────────────────────── */
+.composition-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) 0;
+}
+.comp-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-1);
+}
+.comp-hanzi {
+  font-family: var(--font-hanzi);
+  font-size: 40px;
+  color: var(--ink);
+  line-height: 1;
+}
+.comp-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  color: var(--ink-light);
+  text-align: center;
+}
+.comp-op {
+  font-size: 24px;
+  color: var(--ink-faint);
+  line-height: 1;
+}
+
+/* ── Related words list ───────────────────────────────────────────── */
+.related-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2) var(--sp-4);
+}
+.related-list li {
+  font-size: var(--text-sm);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: var(--sp-2);
+}
+.related-list a { color: var(--crimson-mid); text-decoration: none; }
+.related-list a:hover { text-decoration: underline; }
+.related-hanzi { font-family: var(--font-hanzi); font-size: var(--text-md); }
+
+/* ── Keyword / synonym tags ───────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  background: var(--paper-warm);
+  border: 1px solid var(--border);
+  border-radius: var(--badge-radius);
+  padding: 2px var(--sp-2);
+  margin: 2px;
+  color: var(--ink-mid);
+}
+
+/* ── Author signature (About page) ───────────────────────────────── */
+.author-signature {
+  max-width: 640px;
+  margin-inline: auto;
+  display: block;
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-hover);
+}
+
+/* Verified personal name seal — pressed onto the page like a real chop,
+   framed by generous whitespace and a soft impression shadow. */
+.author-seal-figure {
+  margin: var(--sp-8) auto;
+  max-width: 360px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+}
+.author-seal {
+  width: 200px;
+  height: 200px;
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(122, 21, 21, 0.22));
+  transition: transform var(--ease);
+}
+.author-seal:hover { transform: rotate(-1.5deg) scale(1.02); }
+.author-seal-figure figcaption {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  line-height: var(--lh-snug);
+  color: var(--ink-light);
+  max-width: 34ch;
+}
+.author-seal-figure figcaption em { color: var(--ink-mid); font-style: italic; }
+
+/* ── Homepage layout ──────────────────────────────────────────────── */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--sp-10);
+  margin-top: var(--sp-10);
+}
+.home-main-col { min-width: 0; }
+.home-aside-col { min-width: 0; }
+.home-featured-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: var(--sp-4);
+  padding-bottom: var(--sp-2);
+  border-bottom: 1px solid var(--border-light);
+}
+.home-section-rule {
+  text-align: center;
+  margin: var(--sp-12) 0 0;
+}
+.home-section-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: var(--sp-4);
+}
+
+/* ── Homepage hero (the exhibition entrance) ──────────────────────────
+   A threshold, not a landing page — a soft shaft of gallery light falls from
+   above onto the seal, drawing the visitor inward. */
+.home-hero {
+  position: relative;
+  text-align: center;
+  padding: var(--sp-24) var(--sp-5) var(--sp-20);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-6);
+  max-width: 720px;
+  margin-inline: auto;
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--sp-8));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90%);
+  height: 420px;
+  background: radial-gradient(ellipse at top,
+    rgba(232, 208, 144, 0.28) 0%,
+    rgba(197, 64, 42, 0.06) 35%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+/* The seal is the Atlas logo — treated as a museum mark, framed by generous
+   whitespace and a soft halo, never cropped or stretched (aspect preserved). */
+.home-seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 240px;
+  height: 240px;
+  padding: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center,
+    rgba(232, 208, 144, 0.30) 0%,
+    rgba(232, 208, 144, 0.10) 45%,
+    rgba(245, 237, 214, 0) 70%);
+  transition: transform var(--ease);
+}
+.home-seal:hover { transform: scale(1.02); }
+.home-seal img {
+  width: 168px;
+  height: 168px;
+  object-fit: contain;
+  filter: var(--shadow-seal);
+}
+.home-chinese {
+  font-family: var(--font-hanzi);
+  font-size: clamp(64px, 9vw, 104px);
+  color: var(--crimson);
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: 0 2px 6px rgba(122, 21, 21, 0.12);
+}
+.home-motto {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--ink-mid);
+  max-width: 540px;
+  line-height: var(--lh-snug);
+}
+.home-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  color: var(--ink-light);
+  max-width: 520px;
+  line-height: var(--lh-base);
+}
+/* Elegant stat ledger — hairline-divided, frameless, lets the page breathe. */
+.home-stats {
+  display: flex;
+  gap: var(--sp-10);
+  padding: var(--sp-6) 0 0;
+  margin-top: var(--sp-4);
+  border-top: 1px solid var(--border-light);
+}
+.home-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-2);
+}
+.home-stat-num {
+  font-family: var(--font-hanzi);
+  font-size: 40px;
+  color: var(--crimson);
+  line-height: 1;
+}
+.home-stat-label {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.home-english {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: var(--ls-mega);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: calc(-1 * var(--sp-3));
+}
+
+.home-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--crimson);
+  border: 2px solid var(--crimson);
+  border-radius: var(--card-radius);
+  padding: var(--sp-3) var(--sp-8);
+  text-decoration: none;
+  transition: background var(--ease), border-color var(--ease), transform var(--ease), box-shadow var(--ease);
+  box-shadow: 0 4px 16px rgba(139,26,26,0.3);
+}
+.home-cta:hover {
+  background: var(--crimson-mid);
+  border-color: var(--crimson-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(139,26,26,0.4);
+  color: #fff;
+}
+
+.home-entry-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--card-gap);
+  width: 100%;
+}
+.home-entry-card {
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  padding: var(--card-pad) var(--sp-6);
+  text-align: left;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--ease), border-color var(--ease), transform var(--ease);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.home-entry-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-warm);
+  transform: translateY(-2px);
+}
+.hec-gallery {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: var(--sp-3);
+}
+.hec-icon  { font-size: 24px; margin-bottom: var(--sp-3); }
+.hec-title {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--crimson);
+  margin-bottom: var(--sp-2);
+}
+.hec-count {
+  font-family: var(--font-hanzi);
+  font-size: 28px;
+  color: var(--ink-mid);
+  line-height: 1;
+  margin-bottom: var(--sp-2);
+}
+.hec-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+
+/* ── Gold rule divider ────────────────────────────────────────────── */
+.gold-rule {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-rule), transparent);
+  margin: var(--sp-6) 0;
+}
+
+/* ── Discovery panels ─────────────────────────────────────────────── */
+/* Reusable insight/callout panels with distinct personalities */
+
+.panel {
+  border-radius: var(--card-radius);
+  padding: var(--sp-5) var(--sp-6);
+  margin: var(--sp-6) 0;
+  display: flex;
+  gap: var(--sp-4);
+}
+.panel-icon {
+  font-size: 20px;
+  line-height: 1;
+  flex-shrink: 0;
+  padding-top: 2px;
+}
+.panel-content { flex: 1; min-width: 0; }
+.panel-head {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-2);
+}
+.panel p { margin-bottom: var(--sp-2); }
+.panel p:last-child { margin-bottom: 0; }
+
+/* Did You Know */
+.panel-insight {
+  background: linear-gradient(135deg, rgba(232,208,144,0.18), rgba(255,254,246,0.9));
+  border: 1px solid var(--gold-mid);
+  border-left: 4px solid var(--gold-rule);
+}
+.panel-insight .panel-head { color: var(--gold-mid); }
+
+/* Cultural Note */
+.panel-culture {
+  background: linear-gradient(135deg, rgba(26,62,92,0.07), rgba(255,254,246,0.9));
+  border: 1px solid var(--badge-hsk);
+  border-left: 4px solid var(--badge-hsk);
+}
+.panel-culture .panel-head { color: var(--badge-hsk); }
+
+/* Common Mistake */
+.panel-mistake {
+  background: linear-gradient(135deg, rgba(192,57,43,0.07), rgba(255,254,246,0.9));
+  border: 1px solid var(--crimson-bright);
+  border-left: 4px solid var(--crimson-bright);
+}
+.panel-mistake .panel-head { color: var(--crimson-bright); }
+
+/* Writing Tip */
+.panel-tip {
+  background: linear-gradient(135deg, rgba(26,94,40,0.07), rgba(255,254,246,0.9));
+  border: 1px solid var(--badge-freq);
+  border-left: 4px solid var(--badge-freq);
+}
+.panel-tip .panel-head { color: var(--badge-freq); }
+
+/* ── Hero character (featured on homepage / lesson pages) ─────────── */
+.hero-char {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: var(--paper-card);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--crimson);
+  border-radius: var(--card-radius);
+  padding: var(--sp-8) var(--sp-6) var(--sp-6);
+  box-shadow: var(--shadow-card);
+  gap: var(--sp-3);
+}
+.hero-char-hanzi {
+  font-family: var(--font-hanzi);
+  font-size: 100px;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.hero-char-pinyin {
+  font-family: var(--font-body);
+  font-size: var(--text-xl);
+  font-style: italic;
+  color: var(--ink-light);
+  letter-spacing: 0.02em;
+}
+.hero-char-meaning {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--crimson);
+}
+.hero-char-audio {
+  margin-top: var(--sp-2);
+}
+
+/* ── Difficulty level indicator ───────────────────────────────────── */
+.difficulty {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px var(--sp-3);
+  border-radius: var(--badge-radius);
+  margin-bottom: var(--sp-2);
+}
+.difficulty-beginner     { background: rgba(26,94,40,0.1);  color: var(--badge-freq); }
+.difficulty-intermediate { background: rgba(26,62,92,0.1);  color: var(--badge-hsk); }
+.difficulty-advanced     { background: rgba(139,26,26,0.1); color: var(--crimson); }
+
+
+/* ── Cinematic reward layer ────────────────────────────────────────────
+   Motion is used sparingly, as reward, and only where it deepens the sense
+   of arriving at an exhibit. Everything here is gated behind
+   prefers-reduced-motion: no-preference — the default (and reduced-motion)
+   state is fully visible and still. */
+
+@keyframes atlas-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes atlas-ember {
+  from { filter: var(--shadow-seal) drop-shadow(0 0 4px rgba(197, 64, 42, 0)); }
+  to   { filter: var(--shadow-seal) drop-shadow(0 0 18px rgba(197, 64, 42, 0.45)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entry pages: the hero, then each exhibit, settle into place in sequence. */
+  .entry-banner {
+    animation: atlas-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  /* Exhibits reveal as they scroll into view (walking deeper into the museum).
+     Pending state applies only when JS is active (html.js, set pre-paint) so
+     no-JS visitors always see content; .is-in is added by the observer. */
+  html.js .entry-body > .section-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  html.js .entry-body > .section-card.is-in { opacity: 1; transform: none; }
+
+  /* Homepage: a calm entrance for the threshold. */
+  .home-hero > * { animation: atlas-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .home-seal     { animation-delay: 0.05s; }
+  .home-chinese  { animation-delay: 0.15s; }
+  .home-english  { animation-delay: 0.22s; }
+  .home-motto    { animation-delay: 0.30s; }
+  .home-sub      { animation-delay: 0.38s; }
+  .home-cta      { animation-delay: 0.46s; }
+  .home-stats    { animation-delay: 0.54s; }
+
+  /* The Fire Horse, living guardian — a slow ember breath. */
+  .home-seal img { animation: atlas-ember 6s ease-in-out infinite alternate; }
+}

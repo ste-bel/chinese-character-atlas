@@ -1,0 +1,8 @@
+/* Chinese Character Atlas — Main stylesheet
+   Imports the four design-system layers in dependency order.
+   Edit the individual files; never add rules here. */
+
+@import url("tokens.css");
+@import url("layout.css");
+@import url("components.css");
+@import url("theme.css");

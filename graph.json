@@ -1,0 +1,935 @@
+{
+  "edges": [
+    {
+      "from": "CH0001",
+      "to": "CMP0001",
+      "kind": "character→component"
+    },
+    {
+      "from": "CH0001",
+      "to": "W0001",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0002",
+      "to": "W0002",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0002",
+      "to": "W0002",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0003",
+      "to": "W0003",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0003",
+      "to": "W0003",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0004",
+      "to": "W0004",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0004",
+      "to": "W0004",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0005",
+      "to": "W0005",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0005",
+      "to": "W0005",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0006",
+      "to": "W0006",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0006",
+      "to": "W0006",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0007",
+      "to": "W0007",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0007",
+      "to": "W0007",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0008",
+      "to": "W0008",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0008",
+      "to": "W0008",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0009",
+      "to": "W0009",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0009",
+      "to": "W0009",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0010",
+      "to": "W0010",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0010",
+      "to": "W0010",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0011",
+      "to": "W0011",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0011",
+      "to": "W0011",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0012",
+      "to": "W0012",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0012",
+      "to": "W0012",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0013",
+      "to": "W0013",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0013",
+      "to": "W0013",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0014",
+      "to": "W0014",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0014",
+      "to": "W0014",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0015",
+      "to": "W0015",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0015",
+      "to": "W0015",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0016",
+      "to": "W0016",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0016",
+      "to": "W0016",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0017",
+      "to": "W0017",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0017",
+      "to": "W0017",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0018",
+      "to": "W0018",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0018",
+      "to": "W0018",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0019",
+      "to": "W0019",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0019",
+      "to": "W0019",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CH0020",
+      "to": "W0020",
+      "kind": "character→word"
+    },
+    {
+      "from": "CH0020",
+      "to": "W0020",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "CMP0001",
+      "to": "CH0001",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0002",
+      "to": "CH0006",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0002",
+      "to": "CH0009",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0002",
+      "to": "CH0015",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0002",
+      "to": "CH0016",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0003",
+      "to": "CH0017",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0004",
+      "to": "CH0008",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0005",
+      "to": "CH0007",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0006",
+      "to": "CH0018",
+      "kind": "component→character"
+    },
+    {
+      "from": "CMP0007",
+      "to": "CH0017",
+      "kind": "component→character"
+    },
+    {
+      "from": "L0001",
+      "to": "W0002",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0001",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0004",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0005",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0007",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0006",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0008",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0003",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0009",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0010",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0016",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0011",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0012",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0013",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0018",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0020",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0014",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0017",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0019",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0015",
+      "kind": "lesson→word"
+    },
+    {
+      "from": "L0001",
+      "to": "W0001",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "L0001",
+      "to": "W0004",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "L0001",
+      "to": "W0002",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "L0001",
+      "to": "W0005",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "L0001",
+      "to": "W0008",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "L0001",
+      "to": "W0007",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "P0001",
+      "to": "B0001",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0001",
+      "to": "CH0001",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0001",
+      "to": "CMP0001",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0001",
+      "to": "CMP0001",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0001",
+      "to": "CH0001",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0002",
+      "to": "CH0002",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0003",
+      "to": "CH0003",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0003",
+      "to": "W0016",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0004",
+      "to": "CH0004",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0005",
+      "to": "CH0005",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0006",
+      "to": "CH0006",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0006",
+      "to": "CMP0002",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0007",
+      "to": "CH0007",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0007",
+      "to": "CMP0005",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0008",
+      "to": "CH0008",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0008",
+      "to": "CMP0004",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0009",
+      "to": "CH0009",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0009",
+      "to": "CMP0002",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0009",
+      "to": "W0016",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0010",
+      "to": "CH0010",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0011",
+      "to": "CH0011",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0012",
+      "to": "CH0012",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0013",
+      "to": "CH0013",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0014",
+      "to": "CH0014",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0015",
+      "to": "CH0015",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0015",
+      "to": "CMP0002",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0015",
+      "to": "W0016",
+      "kind": "wiki-link"
+    },
+    {
+      "from": "W0016",
+      "to": "CH0016",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0016",
+      "to": "CMP0002",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0017",
+      "to": "CH0017",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0017",
+      "to": "CMP0003",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0017",
+      "to": "CMP0007",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0018",
+      "to": "CH0018",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0018",
+      "to": "CMP0006",
+      "kind": "word→component"
+    },
+    {
+      "from": "W0019",
+      "to": "CH0019",
+      "kind": "word→character"
+    },
+    {
+      "from": "W0020",
+      "to": "CH0020",
+      "kind": "word→character"
+    }
+  ],
+  "outgoing": {
+    "B0001": [],
+    "CH0001": [
+      "CMP0001",
+      "W0001"
+    ],
+    "CH0002": [
+      "W0002"
+    ],
+    "CH0003": [
+      "W0003"
+    ],
+    "CH0004": [
+      "W0004"
+    ],
+    "CH0005": [
+      "W0005"
+    ],
+    "CH0006": [
+      "W0006"
+    ],
+    "CH0007": [
+      "W0007"
+    ],
+    "CH0008": [
+      "W0008"
+    ],
+    "CH0009": [
+      "W0009"
+    ],
+    "CH0010": [
+      "W0010"
+    ],
+    "CH0011": [
+      "W0011"
+    ],
+    "CH0012": [
+      "W0012"
+    ],
+    "CH0013": [
+      "W0013"
+    ],
+    "CH0014": [
+      "W0014"
+    ],
+    "CH0015": [
+      "W0015"
+    ],
+    "CH0016": [
+      "W0016"
+    ],
+    "CH0017": [
+      "W0017"
+    ],
+    "CH0018": [
+      "W0018"
+    ],
+    "CH0019": [
+      "W0019"
+    ],
+    "CH0020": [
+      "W0020"
+    ],
+    "CMP0001": [
+      "CH0001"
+    ],
+    "CMP0002": [
+      "CH0006",
+      "CH0009",
+      "CH0015",
+      "CH0016"
+    ],
+    "CMP0003": [
+      "CH0017"
+    ],
+    "CMP0004": [
+      "CH0008"
+    ],
+    "CMP0005": [
+      "CH0007"
+    ],
+    "CMP0006": [
+      "CH0018"
+    ],
+    "CMP0007": [
+      "CH0017"
+    ],
+    "L0001": [
+      "W0002",
+      "W0001",
+      "W0004",
+      "W0005",
+      "W0007",
+      "W0006",
+      "W0008",
+      "W0003",
+      "W0009",
+      "W0010",
+      "W0016",
+      "W0011",
+      "W0012",
+      "W0013",
+      "W0018",
+      "W0020",
+      "W0014",
+      "W0017",
+      "W0019",
+      "W0015"
+    ],
+    "P0001": [
+      "B0001"
+    ],
+    "W0001": [
+      "CH0001",
+      "CMP0001"
+    ],
+    "W0002": [
+      "CH0002"
+    ],
+    "W0003": [
+      "CH0003",
+      "W0016"
+    ],
+    "W0004": [
+      "CH0004"
+    ],
+    "W0005": [
+      "CH0005"
+    ],
+    "W0006": [
+      "CH0006",
+      "CMP0002"
+    ],
+    "W0007": [
+      "CH0007",
+      "CMP0005"
+    ],
+    "W0008": [
+      "CH0008",
+      "CMP0004"
+    ],
+    "W0009": [
+      "CH0009",
+      "CMP0002",
+      "W0016"
+    ],
+    "W0010": [
+      "CH0010"
+    ],
+    "W0011": [
+      "CH0011"
+    ],
+    "W0012": [
+      "CH0012"
+    ],
+    "W0013": [
+      "CH0013"
+    ],
+    "W0014": [
+      "CH0014"
+    ],
+    "W0015": [
+      "CH0015",
+      "CMP0002",
+      "W0016"
+    ],
+    "W0016": [
+      "CH0016",
+      "CMP0002"
+    ],
+    "W0017": [
+      "CH0017",
+      "CMP0003",
+      "CMP0007"
+    ],
+    "W0018": [
+      "CH0018",
+      "CMP0006"
+    ],
+    "W0019": [
+      "CH0019"
+    ],
+    "W0020": [
+      "CH0020"
+    ]
+  },
+  "incoming": {
+    "B0001": [
+      "P0001"
+    ],
+    "CH0001": [
+      "CMP0001",
+      "W0001"
+    ],
+    "CH0002": [
+      "W0002"
+    ],
+    "CH0003": [
+      "W0003"
+    ],
+    "CH0004": [
+      "W0004"
+    ],
+    "CH0005": [
+      "W0005"
+    ],
+    "CH0006": [
+      "CMP0002",
+      "W0006"
+    ],
+    "CH0007": [
+      "CMP0005",
+      "W0007"
+    ],
+    "CH0008": [
+      "CMP0004",
+      "W0008"
+    ],
+    "CH0009": [
+      "CMP0002",
+      "W0009"
+    ],
+    "CH0010": [
+      "W0010"
+    ],
+    "CH0011": [
+      "W0011"
+    ],
+    "CH0012": [
+      "W0012"
+    ],
+    "CH0013": [
+      "W0013"
+    ],
+    "CH0014": [
+      "W0014"
+    ],
+    "CH0015": [
+      "CMP0002",
+      "W0015"
+    ],
+    "CH0016": [
+      "CMP0002",
+      "W0016"
+    ],
+    "CH0017": [
+      "CMP0003",
+      "CMP0007",
+      "W0017"
+    ],
+    "CH0018": [
+      "CMP0006",
+      "W0018"
+    ],
+    "CH0019": [
+      "W0019"
+    ],
+    "CH0020": [
+      "W0020"
+    ],
+    "CMP0001": [
+      "CH0001",
+      "W0001"
+    ],
+    "CMP0002": [
+      "W0006",
+      "W0009",
+      "W0015",
+      "W0016"
+    ],
+    "CMP0003": [
+      "W0017"
+    ],
+    "CMP0004": [
+      "W0008"
+    ],
+    "CMP0005": [
+      "W0007"
+    ],
+    "CMP0006": [
+      "W0018"
+    ],
+    "CMP0007": [
+      "W0017"
+    ],
+    "L0001": [],
+    "P0001": [],
+    "W0001": [
+      "CH0001",
+      "L0001"
+    ],
+    "W0002": [
+      "CH0002",
+      "L0001"
+    ],
+    "W0003": [
+      "CH0003",
+      "L0001"
+    ],
+    "W0004": [
+      "CH0004",
+      "L0001"
+    ],
+    "W0005": [
+      "CH0005",
+      "L0001"
+    ],
+    "W0006": [
+      "CH0006",
+      "L0001"
+    ],
+    "W0007": [
+      "CH0007",
+      "L0001"
+    ],
+    "W0008": [
+      "CH0008",
+      "L0001"
+    ],
+    "W0009": [
+      "CH0009",
+      "L0001"
+    ],
+    "W0010": [
+      "CH0010",
+      "L0001"
+    ],
+    "W0011": [
+      "CH0011",
+      "L0001"
+    ],
+    "W0012": [
+      "CH0012",
+      "L0001"
+    ],
+    "W0013": [
+      "CH0013",
+      "L0001"
+    ],
+    "W0014": [
+      "CH0014",
+      "L0001"
+    ],
+    "W0015": [
+      "CH0015",
+      "L0001"
+    ],
+    "W0016": [
+      "CH0016",
+      "L0001",
+      "W0003",
+      "W0009",
+      "W0015"
+    ],
+    "W0017": [
+      "CH0017",
+      "L0001"
+    ],
+    "W0018": [
+      "CH0018",
+      "L0001"
+    ],
+    "W0019": [
+      "CH0019",
+      "L0001"
+    ],
+    "W0020": [
+      "CH0020",
+      "L0001"
+    ]
+  }
+}
