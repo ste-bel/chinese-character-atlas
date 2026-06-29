@@ -4,11 +4,22 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsx engine/src/build.ts"
+    "build": "tsx engine/src/build.ts",
+    "build:warn": "tsx engine/src/build.ts --warn",
+    "validate": "tsx engine/src/validate.ts",
+    "type-check": "tsc --noEmit",
+    "pagefind": "pagefind --site docs --output-path docs/pagefind",
+    "build:full": "npm run build && npm run pagefind",
+    "next-id": "node scripts/next-id.mjs"
   },
   "dependencies": {
-    "gray-matter": "latest",
-    "marked": "latest",
-    "tsx": "latest"
+    "gray-matter": "4.0.3",
+    "marked": "18.0.5",
+    "tsx": "4.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.0",
+    "pagefind": "^1.5.2",
+    "typescript": "^5.8.3"
   }
 }

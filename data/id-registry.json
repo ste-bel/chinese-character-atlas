@@ -1,0 +1,12 @@
+{
+  "_comment": "Next available integer for each ID prefix. Increment after allocating. Never decrement.",
+  "W":   21,
+  "CH":  21,
+  "CMP": 8,
+  "L":   2,
+  "G":   1,
+  "I":   1,
+  "B":   2,
+  "P":   1,
+  "T":   1
+}
