@@ -18,8 +18,11 @@
  * Input:  Entry[]         — all successfully parsed entries
  * Output: ValidationIssue[]
  */
+import fs from "node:fs";
 import path from "node:path";
+import matter from "gray-matter";
 import { Entry, ValidationIssue, metaRecord } from "../types.js";
+import { checkPinyinField, scanBodyForNumericTones } from "../pinyin.js";
 
 /** Maps ID prefix to expected entity type */
 const PREFIX_TO_TYPE: Record<string, string> = {
@@ -115,6 +118,38 @@ export function validate(entries: Entry[]): ValidationIssue[] {
           });
         }
       }
+    }
+
+    // Pinyin fields must use standard Unicode tone marks
+    for (const field of ["pinyin", "author_pinyin"]) {
+      const val = meta[field];
+      if (typeof val !== "string") continue;
+      for (const p of checkPinyinField(val)) {
+        issues.push({
+          severity: p.severity,
+          file: relFile(entry),
+          message: `YAML field "${field}": ${p.message}`,
+        });
+      }
+    }
+
+    // Body must not contain numeric-tone pinyin (e.g. shi4) — warning only,
+    // since free-text detection is heuristic.
+    try {
+      const body = matter(fs.readFileSync(entry.source, "utf8")).content;
+      const hits = scanBodyForNumericTones(body);
+      const seen = new Set<string>();
+      for (const hit of hits) {
+        if (seen.has(hit.token)) continue;
+        seen.add(hit.token);
+        issues.push({
+          severity: "warning",
+          file: relFile(entry),
+          message: `body uses numeric-tone pinyin "${hit.token}" (line ${hit.line}) — use Unicode tone marks`,
+        });
+      }
+    } catch {
+      /* unreadable source is reported elsewhere */
     }
   }
 
