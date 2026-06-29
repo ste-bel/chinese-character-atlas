@@ -5,7 +5,7 @@
  * Stage 5 — Render
  *
  * Converts each entry's Markdown body to an HTML page.
- * Uses the graph for backlinks rather than scanning all entries.
+ * Builds lesson sidebar context for word/character entries.
  *
  * Input:  Entry[], Graph, Map<id, Entry>
  * Output: Map<url, html string>
@@ -15,7 +15,7 @@ import fs from "node:fs";
 import { marked } from "marked";
 import { Entry, Graph, metaRecord } from "../types.js";
 import { preprocess } from "../markdown.js";
-import { page, PageMeta } from "../templates.js";
+import { page, PageContext, LessonSidebar, SidebarItem } from "../templates.js";
 import { esc } from "../utils.js";
 
 const RELATION_FIELDS: string[] = [
@@ -23,10 +23,7 @@ const RELATION_FIELDS: string[] = [
   "grammar", "books", "people", "idioms", "topics", "related",
 ];
 
-function renderRelations(
-  entry: Entry,
-  byId: Map<string, Entry>,
-): string {
+function renderRelations(entry: Entry, byId: Map<string, Entry>): string {
   const meta = metaRecord(entry.metadata);
   const groups: string[] = [];
 
@@ -41,24 +38,17 @@ function renderRelations(
       return `<li><a href="/chinese-character-atlas${target.url}">${esc(`${target.id}${target.hanzi && !target.title.includes(target.hanzi) ? ` ${target.hanzi}` : ""} ${target.title}`.trim())}</a></li>`;
     }).filter(Boolean).join("\n");
 
-    if (items) {
-      groups.push(`<h3>${esc(field)}</h3><ul>${items}</ul>`);
-    }
+    if (items) groups.push(`<h3>${esc(field)}</h3><ul>${items}</ul>`);
   }
 
   if (!groups.length) return "";
-
   return `<section class="card" data-pagefind-ignore>
 <h2>Related Atlas Entries</h2>
 ${groups.join("\n")}
 </section>`;
 }
 
-function renderBacklinks(
-  entry: Entry,
-  graph: Graph,
-  byId: Map<string, Entry>,
-): string {
+function renderBacklinks(entry: Entry, graph: Graph, byId: Map<string, Entry>): string {
   const incomingIds = graph.incoming[entry.id] ?? [];
   if (incomingIds.length === 0) return "";
 
@@ -69,7 +59,6 @@ function renderBacklinks(
     .join("\n");
 
   if (!items) return "";
-
   return `<section class="card" data-pagefind-ignore>
 <h2>Linked from</h2>
 <ul>
@@ -78,23 +67,89 @@ ${items}
 </section>`;
 }
 
-export function render(
-  entries: Entry[],
-  graph: Graph,
-): Map<string, string> {
-  const byId = new Map(entries.map(e => [e.id, e]));
+/**
+ * Build the lesson sidebar for word entries that belong to a lesson.
+ */
+function buildLessonSidebar(
+  entry: Entry,
+  byId: Map<string, Entry>,
+): LessonSidebar | undefined {
+  if (entry.type !== "word") return undefined;
+
+  const meta = metaRecord(entry.metadata);
+  const lessonNum = meta.lesson as number | undefined;
+  if (!lessonNum) return undefined;
+
+  // Find the lesson entry that lists this word
+  let lessonEntry: Entry | undefined;
+  for (const e of byId.values()) {
+    if (e.type !== "lesson") continue;
+    const lm = metaRecord(e.metadata);
+    const wordIds = lm.words as string[] | undefined;
+    if (Array.isArray(wordIds) && wordIds.includes(entry.id)) {
+      lessonEntry = e;
+      break;
+    }
+  }
+  if (!lessonEntry) return undefined;
+
+  const lessonMeta  = metaRecord(lessonEntry.metadata);
+  const wordIds     = (lessonMeta.words as string[] | undefined) ?? [];
+
+  const items: SidebarItem[] = wordIds
+    .map(id => {
+      const w = byId.get(id);
+      if (!w) return null;
+      return {
+        id: w.id,
+        hanzi: w.hanzi,
+        pinyin: w.pinyin,
+        url: `/chinese-character-atlas${w.url}`,
+        active: w.id === entry.id,
+      } satisfies SidebarItem;
+    })
+    .filter((x): x is SidebarItem => x !== null);
+
+  const idx     = wordIds.indexOf(entry.id);
+  const prevId  = idx > 0 ? wordIds[idx - 1] : null;
+  const nextId  = idx < wordIds.length - 1 ? wordIds[idx + 1] : null;
+
+  return {
+    lessonId:      lessonEntry.id,
+    lessonTitle:   lessonEntry.title,
+    lessonNumber:  lessonNum,
+    items,
+    prevUrl:  prevId  ? `/chinese-character-atlas${byId.get(prevId)?.url  ?? ""}` : null,
+    nextUrl:  nextId  ? `/chinese-character-atlas${byId.get(nextId)?.url  ?? ""}` : null,
+    allUrl:   `/chinese-character-atlas${lessonEntry.url}`,
+  };
+}
+
+export function render(entries: Entry[], graph: Graph): Map<string, string> {
+  const byId   = new Map(entries.map(e => [e.id, e]));
   const result = new Map<string, string>();
 
   for (const entry of entries) {
-    const raw = fs.readFileSync(entry.source, "utf8");
+    const raw    = fs.readFileSync(entry.source, "utf8");
     const parsed = matter(raw);
-    const html = (marked.parse(preprocess(parsed.content, byId)) as string);
+    const html   = marked.parse(preprocess(parsed.content, byId)) as string;
+    const meta   = metaRecord(entry.metadata);
 
-    const meta: PageMeta = {
-      id:   entry.id,
-      type: entry.type,
-      ...(entry.hanzi  ? { hanzi:  entry.hanzi  } : {}),
-      ...(entry.pinyin ? { pinyin: entry.pinyin } : {}),
+    const sidebar  = buildLessonSidebar(entry, byId);
+    const wordIdx  = sidebar
+      ? sidebar.items.findIndex(i => i.active) + 1
+      : undefined;
+
+    const ctx: PageContext = {
+      id:               entry.id,
+      type:             entry.type,
+      hanzi:            entry.hanzi  ?? undefined,
+      pinyin:           entry.pinyin ?? undefined,
+      lesson:           (meta.lesson          as number | undefined) ?? undefined,
+      hsk:              (meta.hsk             as number | undefined) ?? undefined,
+      frequency_rank:   (meta.frequency_rank  as number | undefined) ?? undefined,
+      wordIndexInLesson: wordIdx ?? undefined,
+      sidebar,
     };
 
     const body =
@@ -102,7 +157,7 @@ export function render(
       renderRelations(entry, byId) +
       renderBacklinks(entry, graph, byId);
 
-    result.set(entry.source, page(entry.title, body, meta));
+    result.set(entry.source, page(entry.title, body, ctx));
   }
 
   return result;
