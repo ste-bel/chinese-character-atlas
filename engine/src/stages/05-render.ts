@@ -141,17 +141,24 @@ export function render(entries: Entry[], graph: Graph): Map<string, string> {
       ? sidebar.items.findIndex(i => i.active) + 1
       : undefined;
 
+    const lessonVal        = meta.lesson         as number | undefined;
+    const hskVal           = meta.hsk            as number | undefined;
+    const freqVal          = meta.frequency_rank as number | undefined;
+    const strokeVal        = meta.stroke_count   as number | undefined;
+    const hanziVal         = entry.hanzi  ?? undefined;
+    const pinyinVal        = entry.pinyin ?? undefined;
+
     const ctx: PageContext = {
-      id:               entry.id,
-      type:             entry.type,
-      hanzi:            entry.hanzi  ?? undefined,
-      pinyin:           entry.pinyin ?? undefined,
-      lesson:           (meta.lesson          as number | undefined) ?? undefined,
-      hsk:              (meta.hsk             as number | undefined) ?? undefined,
-      frequency_rank:    (meta.frequency_rank  as number | undefined) ?? undefined,
-      stroke_count:      (meta.stroke_count    as number | undefined) ?? undefined,
-      wordIndexInLesson: wordIdx ?? undefined,
-      sidebar,
+      id:   entry.id,
+      type: entry.type,
+      ...(hanziVal   !== undefined && { hanzi:  hanziVal }),
+      ...(pinyinVal  !== undefined && { pinyin: pinyinVal }),
+      ...(lessonVal  !== undefined && { lesson: lessonVal }),
+      ...(hskVal     !== undefined && { hsk:    hskVal }),
+      ...(freqVal    !== undefined && { frequency_rank: freqVal }),
+      ...(strokeVal  !== undefined && { stroke_count:   strokeVal }),
+      ...(wordIdx    !== undefined && { wordIndexInLesson: wordIdx }),
+      ...(sidebar    !== undefined && { sidebar }),
     };
 
     const body =
