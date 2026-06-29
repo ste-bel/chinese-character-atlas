@@ -4,6 +4,58 @@ Each entry covers one session. Format: what changed, why, and what to do next.
 
 ---
 
+## 2026-06-28 (Session 3) — Museum Edition Sprint
+
+### What changed
+
+**`engine/src/templates.ts`**
+- Header completely redesigned: gold shimmer top rule, taller identity block, animated hamburger mobile menu, navigation with hover-card style buttons
+- Premium three-column footer: Fire Horse seal, two nav columns (Explore / Atlas), info column with description, author credit, license, GitHub link
+- SEO meta tags: `og:title`, `og:description`, `og:type`, `twitter:card`, `twitter:title`, canonical URL
+- Breadcrumb trail: auto-generated from entry type and lesson context (Home › Words › Lesson 1 › W0001)
+- Mobile nav drawer: full-width animated drawer opens from hamburger
+
+**`assets/css/layout.css`**
+- Complete header redesign matching new HTML structure
+- Sidebar sticky offset corrected to match actual header height
+- Premium footer layout: three-column grid, responsive at 1000px/600px
+- Breadcrumb styles
+- Hamburger animation (lines rotate on open)
+
+**`assets/css/components.css`**
+- Discovery panels: `.panel-insight`, `.panel-culture`, `.panel-mistake`, `.panel-tip` — each with a distinct color identity
+- Hero character component: `.hero-char` for large featured character display (homepage + future)
+- Difficulty level indicators: `.difficulty-beginner`, `.difficulty-intermediate`, `.difficulty-advanced`
+- Homepage two-column grid: `.home-grid`, `.home-main-col`, `.home-aside-col`
+- CTA button: `.home-cta` with hover lift and shadow
+- English subtitle below 漢字之美 on homepage
+
+**`assets/css/theme.css`**
+- Section h2 headers now render as full card-style: shadow, thicker left border (4px crimson), rounded corners — each section is visually framed
+
+**`engine/src/stages/06-output.ts`**
+- Homepage: Featured Character panel (是, with audio, pinyin, meaning, link)
+- "Begin Exploring" CTA button
+- "Chinese Character Atlas" English subtitle
+- Two-column homepage grid (entry cards left, featured character right)
+
+**`atlas/words/W0001-是.md`**
+- Complete reference implementation, 14 full sections:
+  Pronunciation (with tone change notes), Meaning (when NOT to use table), Examples (Beginner / Intermediate / Advanced with full breakdown), Questions (positive/negative/alternative forms), Grammar (4 patterns with common constructions table), Character Analysis (components with wiki-links), Historical Evolution (Oracle → Modern with narrative), Pronunciation in Depth (regional, historical), Modern Usage (formal/informal/internet), Common Mistakes (English/French/Spanish interference tables), Cultural Notes (Confucius quotation), Atlas Note, References (4 academic sources)
+- Status changed: draft → published
+
+### Why
+The sprint mandate was "turn the Atlas into something people remember — not because it contains information, because it is beautiful." W0001 sets the reference standard for every future entry. The header and footer needed to feel like a museum entrance and exit, not a utility bar.
+
+### Next recommended task
+1. **Apply W0001 depth to W0002–W0005** — Each word needs the full treatment: grammar patterns, historical evolution, cultural notes. Start with 的 (W0002) and 我 (W0003).
+2. **CH0001 — 是 character page** — Add the full character story: complete evolution grid (Oracle/Bronze/Seal/Clerical/Regular/Modern), stroke order, component breakdown linking CMP0001.
+3. **Homepage "Atlas Philosophy" card** — Link to a new philosophy page or P0001 section about the Atlas mission.
+4. **Search page styling** — Pagefind UI should match the parchment/crimson palette via CSS overrides.
+5. **Component pages** — CMP0001 (日) and CMP0002 (人) deserve exploration-style pages showing all characters that use them.
+
+---
+
 ## 2026-06-28 (Session 2) — Design System, Two-Mark Branding, Museum Homepage
 
 ### What changed
