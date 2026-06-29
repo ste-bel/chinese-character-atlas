@@ -217,13 +217,13 @@ function writeHomepage(entries: Entry[]): void {
   <p class="home-motto">Every character tells a story.<br>Every story opens a civilization.</p>
 
   <p class="home-sub">
-    A museum-quality encyclopedia of the Chinese language — characters,
-    words, history, culture, and the connections between them.
-    Built for learners who want to understand not just <em>what</em>
-    Chinese means, but <em>why</em>.
+    Four thousand years of thought, poetry, and history live inside a few
+    thousand characters. The Atlas opens them one at a time — origin and
+    evolution, sound and meaning, the culture each one carries, and the
+    threads that bind them together.
   </p>
 
-  <a href="${BASE}/lessons/" class="home-cta">Begin Exploring</a>
+  <a href="${BASE}/words/W0001-是.html" class="home-cta">Enter the Atlas</a>
 
   <div class="home-stats">
     ${words.length      ? `<div class="home-stat"><div class="home-stat-num">${words.length}</div><div class="home-stat-label">Words</div></div>` : ""}
