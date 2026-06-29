@@ -38,7 +38,7 @@ function renderRelations(
       if (typeof id !== "string") return "";
       const target = byId.get(id);
       if (!target) return `<li>${esc(id)}</li>`;
-      return `<li><a href="/chinese-character-atlas${target.url}">${esc(`${target.id} ${target.hanzi ?? ""} ${target.title}`.trim())}</a></li>`;
+      return `<li><a href="/chinese-character-atlas${target.url}">${esc(`${target.id}${target.hanzi && !target.title.includes(target.hanzi) ? ` ${target.hanzi}` : ""} ${target.title}`.trim())}</a></li>`;
     }).filter(Boolean).join("\n");
 
     if (items) {
@@ -65,7 +65,7 @@ function renderBacklinks(
   const items = incomingIds
     .map(id => byId.get(id))
     .filter((e): e is Entry => e !== undefined)
-    .map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id} ${e.hanzi ?? ""} ${e.title}`.trim())}</a></li>`)
+    .map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id}${e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : ""} ${e.title}`.trim())}</a></li>`)
     .join("\n");
 
   if (!items) return "";

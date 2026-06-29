@@ -70,7 +70,8 @@ function writeIndexPages(entries: Entry[]): void {
 
     const items = section
       .map(e => {
-        const label = esc(`${e.id} ${e.hanzi ?? ""} ${e.title}`.trim());
+        const hanziPart = e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : "";
+        const label = esc(`${e.id}${hanziPart} ${e.title}`.trim());
         const pinyin = e.pinyin ? ` — <em>${esc(e.pinyin)}</em>` : "";
         return `<li><a href="/chinese-character-atlas${e.url}">${label}</a>${pinyin}</li>`;
       })
@@ -164,7 +165,7 @@ function writeHomepage(entries: Entry[]): void {
   function sectionCard(title: string, items: Entry[], dir: string): string {
     if (items.length === 0) return "";
     const links = items.slice(0, 6).map(e =>
-      `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id} ${e.hanzi ?? ""} ${e.title}`.trim())}</a></li>`
+      `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id}${e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : ""} ${e.title}`.trim())}</a></li>`
     ).join("\n");
     const more = items.length > 6
       ? `<li><a href="/chinese-character-atlas/${dir}/">All ${items.length} →</a></li>`
@@ -200,10 +201,11 @@ ${[
 
 function copyStaticPages(): void {
   const TEMPLATES = path.join(ROOT, "templates");
-  if (!fs.existsSync(TEMPLATES)) return;
-  for (const name of fs.readdirSync(TEMPLATES)) {
-    if (name.endsWith(".html")) {
-      fs.copyFileSync(path.join(TEMPLATES, name), path.join(DOCS, name));
+  if (fs.existsSync(TEMPLATES)) {
+    for (const name of fs.readdirSync(TEMPLATES)) {
+      if (name.endsWith(".html")) {
+        fs.copyFileSync(path.join(TEMPLATES, name), path.join(DOCS, name));
+      }
     }
   }
 
@@ -211,5 +213,25 @@ function copyStaticPages(): void {
   const noJekyll = path.join(ROOT, ".nojekyll");
   if (fs.existsSync(noJekyll)) {
     fs.copyFileSync(noJekyll, path.join(DOCS, ".nojekyll"));
+  }
+
+  // Copy assets/ into docs/assets/ so CSS, JS, and images are served
+  const ASSETS_SRC = path.join(ROOT, "assets");
+  const ASSETS_DST = path.join(DOCS, "assets");
+  if (fs.existsSync(ASSETS_SRC)) {
+    copyDir(ASSETS_SRC, ASSETS_DST);
+  }
+}
+
+function copyDir(src: string, dst: string): void {
+  fs.mkdirSync(dst, { recursive: true });
+  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+    const srcPath = path.join(src, entry.name);
+    const dstPath = path.join(dst, entry.name);
+    if (entry.isDirectory()) {
+      copyDir(srcPath, dstPath);
+    } else {
+      fs.copyFileSync(srcPath, dstPath);
+    }
   }
 }
