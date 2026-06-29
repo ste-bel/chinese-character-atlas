@@ -41,10 +41,11 @@ export interface PageContext extends PageMeta {
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function freqLabel(rank: number): string {
-  if (rank <= 5)   return "Very High Frequency";
-  if (rank <= 20)  return "High Frequency";
-  if (rank <= 100) return "Common";
-  return "Standard";
+  // Express rank as simplified fraction of 2000 common words
+  // e.g. rank 20 → "1 / 100", rank 100 → "1 / 20"
+  const denom = Math.round(2000 / rank);
+  if (denom <= 0) return `# ${rank}`;
+  return `1 / ${denom.toLocaleString("en")}`;
 }
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
