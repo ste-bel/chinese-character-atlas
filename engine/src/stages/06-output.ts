@@ -210,8 +210,8 @@ function writeHomepage(entries: Entry[]): void {
   const body = `
 <div class="home-hero">
   <a href="${BASE}/people/P0001-stephane-belanger.html" class="home-seal" aria-label="About the author">
-    <img src="${BASE}/assets/images/logo/fire-horse-seal.png"
-         alt="白朗志远 Fire Horse seal" width="160" height="160">
+    <img src="${BASE}/assets/images/logo/fire-horse-seal-round.svg"
+         alt="Fire Horse seal — the Atlas logo" width="168" height="168">
   </a>
 
   <div class="home-chinese">漢字之美</div>
