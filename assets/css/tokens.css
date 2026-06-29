@@ -1,0 +1,94 @@
+/* ═══════════════════════════════════════════════════════════════════
+   TOKENS — Design Tokens for the Chinese Character Atlas
+   Source of truth: DESIGN_SYSTEM.md
+   Do not add component rules here. Tokens only.
+═══════════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ── Backgrounds ─────────────────────────────────────────────── */
+  --paper:          #F5EDD6;   /* main page background              */
+  --paper-warm:     #EDE0C4;   /* sidebar background                */
+  --paper-card:     #FFFEF6;   /* card backgrounds                  */
+  --paper-dark:     #E2D2B0;   /* footer, deeply nested panels      */
+
+  /* ── Crimson ─────────────────────────────────────────────────── */
+  --crimson-header: #7A1515;   /* site header bar                   */
+  --crimson-bar:    #4A0808;   /* bottom bar, darkest               */
+  --crimson:        #8B1A1A;   /* section circles, active states    */
+  --crimson-mid:    #A32020;   /* hover, word banner label          */
+  --crimson-bright: #C0392B;   /* emphasis, warning accent          */
+
+  /* ── Gold ────────────────────────────────────────────────────── */
+  --gold-rule:      #C0A040;   /* horizontal rules, decorative      */
+  --gold-mid:       #B88C28;   /* border accents                    */
+  --gold-light:     #D4AF5A;   /* text on dark crimson              */
+  --gold-pale:      #E8D090;   /* subtle highlights                 */
+  --gold-pale-rgb:  232,208,144; /* for rgba() use                  */
+
+  /* ── Ink ─────────────────────────────────────────────────────── */
+  --ink:            #1A0E08;   /* primary text                      */
+  --ink-mid:        #3D2010;   /* secondary text, body              */
+  --ink-light:      #6B4423;   /* tertiary, metadata, captions      */
+  --ink-faint:      #9B7A5A;   /* placeholders, disabled            */
+
+  /* ── Borders ─────────────────────────────────────────────────── */
+  --border:         #C9A97A;   /* card borders, main dividers       */
+  --border-light:   #DDC7A1;   /* subtle dividers, inner sections   */
+  --border-warm:    #B89060;   /* emphasis borders, active cards    */
+
+  /* ── Badges ──────────────────────────────────────────────────── */
+  --badge-hsk:      #1A3A5C;   /* HSK level (dark navy)             */
+  --badge-freq:     #1A5E28;   /* frequency (forest green)          */
+  --badge-essential:#145040;   /* essential (dark teal)             */
+  --badge-type:     #5C3A00;   /* entry type (dark amber)           */
+
+  /* ── Fonts ───────────────────────────────────────────────────── */
+  --font-hanzi: "Noto Serif CJK SC", "Source Han Serif CN",
+                "FangSong", "STSong", serif;
+  --font-body:  "Palatino Linotype", "Palatino", "Book Antiqua",
+                Georgia, serif;
+  --font-ui:    "Optima", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:  "Menlo", "Consolas", "Courier New", monospace;
+
+  /* ── Type scale ──────────────────────────────────────────────── */
+  --text-xs:    10px;
+  --text-sm:    11px;
+  --text-base:  14px;
+  --text-md:    16px;
+  --text-lg:    20px;
+  --text-xl:    28px;
+  --text-2xl:   40px;
+  --text-hanzi: 96px;
+
+  /* ── Spacing ─────────────────────────────────────────────────── */
+  --sp-1:   4px;
+  --sp-2:   8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-5:  20px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ── Layout ──────────────────────────────────────────────────── */
+  --sidebar-w:       200px;
+  --content-max:    1120px;
+  --header-h:         56px;
+  --bottom-bar-h:     44px;
+  --card-radius:       8px;
+  --card-gap:         14px;
+  --card-pad:         20px;
+  --badge-radius:      4px;
+  --section-circle:   24px;
+
+  /* ── Shadows ─────────────────────────────────────────────────── */
+  --shadow-card:  0 2px 8px rgba(74, 38, 10, 0.07);
+  --shadow-hover: 0 4px 16px rgba(74, 38, 10, 0.13);
+  --shadow-seal:  drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+
+  /* ── Transitions ─────────────────────────────────────────────── */
+  --ease: 150ms ease;
+}
