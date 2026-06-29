@@ -98,12 +98,17 @@ The engine transforms Markdown → HTML. That relationship is sacred.
 
 ## 7. Design Authority
 
-The supplied infographic (stored at
-`assets/images/reference/infographic.png`) is the authoritative visual
-specification. Any ambiguity in CSS or layout is resolved by the infographic.
+The infographic was the **origin reference** — the training wheels that taught
+the Atlas its palette, its seal aesthetic, and its hanzi-first hierarchy. It is
+no longer the target.
 
-The infographic wins over any personal preference, any framework default,
-and any AI-generated suggestion.
+The infographic is one beautiful page. The Atlas is an entire museum, and must
+develop an identity that *surpasses* its origin. Authority now rests in the
+Atlas's own design language — `DESIGN_SYSTEM.md` and `DESIGN_TOKENS.md` — held
+to the quality bar in §8.
+
+Where the poster and the Atlas's own judgement disagree, the Atlas wins. Never
+reach backward toward the infographic.
 
 ---
 
@@ -133,7 +138,7 @@ Add decisions that define the project's character.
 
 Phase 2 — Visual Excellence
 
-W0001 is the reference implementation.
-Every new page is measured against it.
-The visual standard is set by the infographic.
-Architecture changes are frozen until the visual standard is achieved.
+W0001 is the reference implementation. Every new page is measured against it.
+The visual standard is set by the Atlas's own evolving identity — not by the
+infographic, which has served its purpose.
+Architecture changes are frozen until that standard is achieved.

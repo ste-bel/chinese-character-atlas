@@ -1,7 +1,9 @@
 # Chinese Character Atlas — Design System
 
-Extracted from the authoritative infographic reference.
-Every value here was observed directly. Nothing was invented.
+This system *began* by observing the origin infographic — but the infographic
+was training wheels, not the ceiling. These values are now the Atlas's **own**
+design language, free to evolve beyond their origin toward a museum identity the
+poster only hinted at. See `DESIGN_TOKENS.md` for the flat token reference.
 
 ---
 
