@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600">
+  <rect width="1600" height="1600" fill="#120e0c"/>
+  <text x="800" y="130" text-anchor="middle" font-size="120" fill="#e2b15d" font-family="Noto Serif CJK SC, serif">白朗志远</text>
+  <text x="800" y="210" text-anchor="middle" font-size="48" fill="#e2b15d" font-family="serif">BÁI LǎNG ZHÌYUǎN</text>
+  <rect x="360" y="340" width="880" height="880" rx="24" fill="none" stroke="#be2416" stroke-width="38"/>
+  <rect x="430" y="410" width="740" height="740" rx="14" fill="none" stroke="#be2416" stroke-width="18"/>
+  <text x="1002" y="610" text-anchor="middle" dominant-baseline="middle" font-size="245" fill="#be2416" font-family="Noto Serif CJK SC, serif">白</text>
+  <text x="1002" y="974" text-anchor="middle" dominant-baseline="middle" font-size="245" fill="#be2416" font-family="Noto Serif CJK SC, serif">朗</text>
+  <text x="606" y="610" text-anchor="middle" dominant-baseline="middle" font-size="245" fill="#be2416" font-family="Noto Serif CJK SC, serif">志</text>
+  <text x="606" y="974" text-anchor="middle" dominant-baseline="middle" font-size="245" fill="#be2416" font-family="Noto Serif CJK SC, serif">远</text>
+</svg>

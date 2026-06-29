@@ -48,6 +48,22 @@ export interface PageContext extends PageMeta {
   lessonTitle?: string;         // for breadcrumb display
 }
 
+// ── Brand ───────────────────────────────────────────────────────────────────
+
+/**
+ * The Atlas Logo — the round Fire Horse seal, the Atlas's living guardian.
+ *
+ * Centralized so the planned animated logo (see `brand/fire-horse-3d/`: 3D
+ * carved medallion, living flame, ember loop, video intro) can be introduced
+ * in ONE place — swap this <img> for a <picture>, animated SVG, or <video>
+ * loop — without editing every template. Static PNG remains the fallback.
+ */
+export function siteSeal(opts: { size: number; className: string; alt: string }): string {
+  const { size, className, alt } = opts;
+  return `<img src="${BASE}/assets/images/logo/fire-horse-seal-64.png" `
+       + `alt="${esc(alt)}" width="${size}" height="${size}" class="${esc(className)}">`;
+}
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 function freqLabel(rank: number): string {
@@ -303,8 +319,7 @@ ${pagefindMeta ? `    ${pagefindMeta}` : ""}
   <div class="header-top-rule" aria-hidden="true"></div>
   <div class="header-inner">
     <a href="${BASE}/" class="header-brand" aria-label="Chinese Character Atlas — Home">
-      <img src="${BASE}/assets/images/logo/fire-horse-seal-64.png"
-           alt="Fire Horse seal — site logo" width="44" height="44" class="header-seal">
+      ${siteSeal({ size: 44, className: "header-seal", alt: "Fire Horse seal — site logo" })}
       <div class="header-identity">
         <div class="header-hanzi">漢字之美</div>
         <div class="header-subtitle">Chinese Character Atlas</div>
@@ -352,8 +367,7 @@ ${bottomBar}
   <div class="footer-rule" aria-hidden="true"></div>
   <div class="footer-inner">
     <div class="footer-brand">
-      <img src="${BASE}/assets/images/logo/fire-horse-seal-64.png"
-           alt="Fire Horse seal" width="48" height="48" class="footer-seal">
+      ${siteSeal({ size: 52, className: "footer-seal", alt: "Fire Horse seal" })}
       <div class="footer-brand-text">
         <div class="footer-title">漢字之美</div>
         <div class="footer-tagline">Chinese Character Atlas</div>

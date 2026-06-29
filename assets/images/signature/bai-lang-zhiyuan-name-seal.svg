@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img"
+     aria-label="Personal name seal: 白朗志远 (Bái Lǎng Zhìyuǎn)">
+  <title>白朗志远 — Bái Lǎng Zhìyuǎn</title>
+  <!-- Verified personal name seal. Characters are real Unicode (白 朗 志 远),
+       not AI-generated glyphs. Traditional 2×2 grid read right column
+       top→bottom, then left column: 白 → 朗 → 志 → 远.
+       Seal script (篆书) recreation to follow before this becomes permanent. -->
+  <g fill="none" stroke="#BE2416" stroke-linejoin="round">
+    <rect x="22" y="22" width="356" height="356" rx="10" stroke-width="22"/>
+    <rect x="54" y="54" width="292" height="292" rx="5" stroke-width="8"/>
+  </g>
+  <g fill="#BE2416" font-family="'Noto Serif CJK SC','Source Han Serif CN','STSong',serif"
+     font-weight="700" font-size="118" text-anchor="middle">
+    <text x="272" y="148">白</text>
+    <text x="272" y="290">朗</text>
+    <text x="128" y="148">志</text>
+    <text x="128" y="290">远</text>
+  </g>
+</svg>

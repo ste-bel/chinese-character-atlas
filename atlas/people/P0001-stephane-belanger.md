@@ -71,6 +71,9 @@ without tranquility, one cannot reach far.
 
 ## Signature
 
-<img src="/chinese-character-atlas/assets/images/signature/bai-lang-zhiyuan-signature.png"
-     alt="白朗志远 — Full author signature composition"
-     class="author-signature">
+<figure class="author-seal-figure">
+<img src="/chinese-character-atlas/assets/images/signature/bai-lang-zhiyuan-name-seal.svg"
+     alt="Personal name seal of 白朗志远 (Bái Lǎng Zhìyuǎn)"
+     class="author-seal" width="260" height="260">
+<figcaption>白朗志远 · <em>Bái Lǎng Zhìyuǎn</em><br>The author's personal name seal, set from verified characters — read right to left, top to bottom. A seal-script (篆书) recreation will become the permanent mark.</figcaption>
+</figure>

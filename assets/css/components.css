@@ -528,6 +528,34 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
   box-shadow: var(--shadow-hover);
 }
 
+/* Verified personal name seal — pressed onto the page like a real chop,
+   framed by generous whitespace and a soft impression shadow. */
+.author-seal-figure {
+  margin: var(--sp-8) auto;
+  max-width: 360px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-5);
+}
+.author-seal {
+  width: 200px;
+  height: 200px;
+  display: block;
+  filter: drop-shadow(0 3px 8px rgba(122, 21, 21, 0.22));
+  transition: transform var(--ease);
+}
+.author-seal:hover { transform: rotate(-1.5deg) scale(1.02); }
+.author-seal-figure figcaption {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  line-height: var(--lh-snug);
+  color: var(--ink-light);
+  max-width: 34ch;
+}
+.author-seal-figure figcaption em { color: var(--ink-mid); font-style: italic; }
+
 /* ── Homepage layout ──────────────────────────────────────────────── */
 .home-grid {
   display: grid;
