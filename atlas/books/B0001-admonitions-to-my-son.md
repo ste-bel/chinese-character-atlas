@@ -2,9 +2,10 @@
 id: B0001
 type: book
 title: 诫子书
+pinyin: jiè zǐ shū
 english_title: Admonitions to My Son
 author: 诸葛亮
-pinyin: Zhūgě Liàng
+author_pinyin: Zhūgě Liàng
 period: Three Kingdoms
 status: draft
 ---
