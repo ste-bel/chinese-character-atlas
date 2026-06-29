@@ -206,4 +206,10 @@ function copyStaticPages(): void {
       fs.copyFileSync(path.join(TEMPLATES, name), path.join(DOCS, name));
     }
   }
+
+  // Copy .nojekyll to docs/ so GitHub Pages skips Jekyll processing
+  const noJekyll = path.join(ROOT, ".nojekyll");
+  if (fs.existsSync(noJekyll)) {
+    fs.copyFileSync(noJekyll, path.join(DOCS, ".nojekyll"));
+  }
 }
