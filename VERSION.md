@@ -1,20 +1,26 @@
-# Chinese Character Atlas
+# Chinese Character Atlas — Version
 
-Current Version: 0.1.0
+The authoritative version number is in `package.json`.
 
-Status:
-Foundation Complete
+```bash
+node -e "console.log(JSON.parse(require('fs').readFileSync('package.json','utf8')).version)"
+```
 
-Current Milestone:
-Website Online
+The current build's version and statistics are in `docs/statistics.json` after every build.
 
-Next Milestone:
-First Complete Word (W0001)
+---
 
-Long-Term Goal:
-Build the world's most interconnected Chinese language encyclopedia.
+## Status
 
-Project Motto:
+Foundation: complete
+
+Active milestone: Phase 2 — Core Vocabulary
+
+Long-term goal: Build the world's most interconnected Chinese language encyclopedia.
+
+---
+
+## Motto
 
 Every character tells a story.
 

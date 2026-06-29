@@ -216,3 +216,107 @@ Historically careful.
 
 Never sensational.
 
+
+---
+
+# Atlas Markdown Extensions
+
+The Atlas uses standard CommonMark with three custom extensions.
+No other custom syntax is supported.
+
+---
+
+## 1. Wiki-Links — `[[ID]]` and `[[ID|label]]`
+
+Use wiki-links to create cross-references between atlas entries.
+
+**Syntax:**
+
+```
+[[W0001]]
+[[W0001|label text]]
+```
+
+**Rules:**
+
+- The ID must be a valid stable identifier (W0001, CH0001, CMP0001, etc.).
+- If no label is given, the engine renders the entry's ID + hanzi + title.
+- If the ID does not exist, the link renders as literal `[[W0001]]` text and the build reports a validation error.
+- Wiki-links in content create graph edges of kind `wiki-link`.
+- For typed graph edges (word→character, lesson→word), use YAML relation arrays instead.
+
+**Examples:**
+
+```markdown
+See [[CH0001]] for the full character history.
+
+The component [[CMP0001|日]] appears in over a hundred common characters.
+```
+
+---
+
+## 2. Audio Buttons — `{{audio:text}}`
+
+Renders an inline 🔊 button that speaks the given Chinese text using the Web Speech API.
+
+**Syntax:**
+
+```
+{{audio:Chinese text here}}
+```
+
+**Rules:**
+
+- The text between `audio:` and `}}` is spoken verbatim.
+- Always place the audio button immediately before the Chinese text it covers.
+- One button per sentence or phrase.
+- Do not nest custom syntax inside the audio tag.
+
+**Examples:**
+
+```markdown
+{{audio:我是加拿大人。}}
+我是加拿大人。
+*Wǒ shì Jiānádà rén.*
+I am Canadian.
+```
+
+---
+
+## 3. Atlas Notes — `{{atlas-note}}...{{/atlas-note}}`
+
+Renders a highlighted callout box for pedagogical notes, learning tips,
+or important clarifications that sit outside the main prose.
+
+**Syntax:**
+
+```
+{{atlas-note}}
+Your note content here.
+{{/atlas-note}}
+```
+
+**Rules:**
+
+- Content inside the tags is rendered as HTML (no nested Markdown headers).
+- Use for learning observations, not for factual corrections.
+- Do not nest other custom extensions inside atlas-note.
+- One atlas-note per major section at most.
+
+**Examples:**
+
+```
+{{atlas-note}}
+English uses "to be" everywhere. Chinese uses 是 more selectively.
+Learning when **not** to use 是 is as important as learning when to use it.
+{{/atlas-note}}
+```
+
+---
+
+## Syntax Not Supported
+
+Do not invent new syntax. Unsupported patterns are passed through as literal text
+or silently dropped. If you need a new rendering behaviour, open an issue or
+propose an engine change — do not embed undocumented syntax in content files.
+
