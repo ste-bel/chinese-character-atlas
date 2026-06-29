@@ -168,10 +168,11 @@ function writeHomepage(entries: Entry[]): void {
   const lessons    = entries.filter(e => e.type === "lesson");
   const books      = entries.filter(e => e.type === "book");
 
-  function entryCard(title: string, icon: string, items: Entry[], dir: string, desc: string): string {
+  function entryCard(numeral: string, title: string, icon: string, items: Entry[], dir: string, desc: string): string {
     if (items.length === 0) return "";
     return `
 <a class="home-entry-card" href="${BASE}/${dir}/">
+  <div class="hec-gallery">Gallery ${numeral}</div>
   <div class="hec-icon">${icon}</div>
   <div class="hec-title">${esc(title)}</div>
   <div class="hec-count">${items.length}</div>
@@ -179,12 +180,14 @@ function writeHomepage(entries: Entry[]): void {
 </a>`;
   }
 
+  // The existing destinations, framed as the museum's galleries. (Future
+  // galleries — Calligraphy, Oracle Bones — arrive when their exhibits exist.)
   const sections = [
-    entryCard("Words",      "字", words,      "words",      "Vocabulary with examples, grammar, and cross-references"),
-    entryCard("Characters", "文", characters,  "characters", "Historical evolution, components, and cultural meaning"),
-    entryCard("Components", "部", components,  "components", "Radicals and building blocks of Chinese writing"),
-    entryCard("Lessons",    "📖", lessons,     "lessons",    "Structured learning paths through the Atlas"),
-    entryCard("Books",      "📚", books,       "books",      "Classical and modern texts referenced throughout"),
+    entryCard("I",   "Lessons",    "📖", lessons,     "lessons",    "Be guided, word by word, along the path through the Atlas"),
+    entryCard("II",  "Words",      "字", words,        "words",      "Each word an exhibit — meaning, grammar, and the threads between them"),
+    entryCard("III", "Characters", "文", characters,   "characters", "Origin, evolution, and the cultural memory each character carries"),
+    entryCard("IV",  "Components", "部", components,    "components", "The radicals and strokes from which every character is built"),
+    entryCard("V",   "Texts",      "📚", books,        "books",      "The classical and modern sources the Atlas draws upon"),
   ].filter(Boolean).join("\n");
 
   // Featured character (W0001 / 是 — the reference implementation)
@@ -235,7 +238,7 @@ function writeHomepage(entries: Entry[]): void {
 
 <div class="home-section-rule">
   <hr class="gold-rule">
-  <div class="home-section-label">Begin your exploration</div>
+  <div class="home-section-label">The Galleries</div>
 </div>
 
 <div class="home-grid">

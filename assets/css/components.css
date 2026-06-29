@@ -590,8 +590,11 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
   margin-top: var(--sp-4);
 }
 
-/* ── Homepage hero ────────────────────────────────────────────────── */
+/* ── Homepage hero (the exhibition entrance) ──────────────────────────
+   A threshold, not a landing page — a soft shaft of gallery light falls from
+   above onto the seal, drawing the visitor inward. */
 .home-hero {
+  position: relative;
   text-align: center;
   padding: var(--sp-24) var(--sp-5) var(--sp-20);
   display: flex;
@@ -600,6 +603,21 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
   gap: var(--sp-6);
   max-width: 720px;
   margin-inline: auto;
+}
+.home-hero::before {
+  content: "";
+  position: absolute;
+  top: calc(-1 * var(--sp-8));
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(620px, 90%);
+  height: 420px;
+  background: radial-gradient(ellipse at top,
+    rgba(232, 208, 144, 0.28) 0%,
+    rgba(197, 64, 42, 0.06) 35%,
+    transparent 70%);
+  pointer-events: none;
+  z-index: -1;
 }
 /* The seal is the Atlas logo — treated as a museum mark, framed by generous
    whitespace and a soft halo, never cropped or stretched (aspect preserved). */
@@ -733,6 +751,15 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
   box-shadow: var(--shadow-hover);
   border-color: var(--border-warm);
   transform: translateY(-2px);
+}
+.hec-gallery {
+  font-family: var(--font-ui);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--bronze);
+  margin-bottom: var(--sp-3);
 }
 .hec-icon  { font-size: 24px; margin-bottom: var(--sp-3); }
 .hec-title {
