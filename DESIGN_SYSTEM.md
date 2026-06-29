@@ -1,9 +1,10 @@
 # Chinese Character Atlas — Design System
 
-This system *began* by observing the origin infographic — but the infographic
-was training wheels, not the ceiling. These values are now the Atlas's **own**
-design language, free to evolve beyond their origin toward a museum identity the
-poster only hinted at. See `DESIGN_TOKENS.md` for the flat token reference.
+Derived from the **authoritative infographic** — the approved visual
+specification the Atlas must match (Governance 2.0, `project/`). Every value
+here was observed from it; nothing invented. The Museum-of-Living-Knowledge
+identity governs the *quality of finish*, not the layout. See `DESIGN_TOKENS.md`
+for the flat token reference.
 
 ---
 

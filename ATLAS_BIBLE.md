@@ -98,17 +98,15 @@ The engine transforms Markdown → HTML. That relationship is sacred.
 
 ## 7. Design Authority
 
-The infographic was the **origin reference** — the training wheels that taught
-the Atlas its palette, its seal aesthetic, and its hanzi-first hierarchy. It is
-no longer the target.
+The approved infographic is the **authoritative visual specification** (see
+`project/` — Governance 2.0: `NON_NEGOTIABLES_2.0.md`, `DESIGN_SYSTEM_2.0.md`).
+Any ambiguity in layout or CSS is resolved by the infographic; it overrides
+framework defaults and implementation preference. **Match the infographic.**
 
-The infographic is one beautiful page. The Atlas is an entire museum, and must
-develop an identity that *surpasses* its origin. Authority now rests in the
-Atlas's own design language — `DESIGN_SYSTEM.md` and `DESIGN_TOKENS.md` — held
-to the quality bar in §8.
-
-Where the poster and the Atlas's own judgement disagree, the Atlas wins. Never
-reach backward toward the infographic.
+The Museum-of-Living-Knowledge identity (`ATLAS_IDENTITY.md`) is the *quality of
+finish* — how museum-grade the result feels — not a licence to depart from the
+infographic's layout. Build what the infographic specifies; finish it to museum
+quality. Where the two seem to conflict on layout, the infographic governs.
 
 ---
 
@@ -138,7 +136,8 @@ Add decisions that define the project's character.
 
 Phase 2 — Visual Excellence
 
-W0001 is the reference implementation. Every new page is measured against it.
-The visual standard is set by the Atlas's own evolving identity — not by the
-infographic, which has served its purpose.
+Phase 2 — Museum Experience (v0.3).
+The visual standard is the approved infographic, finished to museum quality.
+Priority order follows `project/IMPLEMENTATION_QUEUE_2.0.md`: (1) match the
+infographic exactly, then (4) perfect W0001 as the reference implementation.
 Architecture changes are frozen until that standard is achieved.

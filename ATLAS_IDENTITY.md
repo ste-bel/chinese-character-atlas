@@ -1,14 +1,16 @@
 # Chinese Character Atlas — Identity
 
-> The infographic was training wheels. This is the destination.
+> The infographic says *what* to build. This identity says *how well* it must feel.
 
 The Atlas is a **Museum of Living Knowledge**. Opening it should feel like
 entering a great museum and then being guided, personally, by a scholar through
 the evolution of the Chinese language.
 
-This document is the north star for every visual and experiential decision. When
-`DESIGN_SYSTEM.md` says *how*, this says *why* and *to what end*. It outranks the
-origin infographic (see `ATLAS_BIBLE.md` §7).
+This document is the **quality bar** for every visual and experiential decision —
+the standard of finish the infographic's layout must be built to. It does **not**
+override the infographic: on layout, the infographic governs
+(`ATLAS_BIBLE.md` §7, `project/NON_NEGOTIABLES_2.0.md`). Match the infographic;
+make it feel like this.
 
 ---
 
