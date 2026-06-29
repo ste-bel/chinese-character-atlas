@@ -12,9 +12,8 @@
  */
 import matter from "gray-matter";
 import fs from "node:fs";
-import { marked } from "marked";
 import { Entry, Graph, metaRecord } from "../types.js";
-import { preprocess } from "../markdown.js";
+import { renderSectionedBody } from "../sections.js";
 import { page, PageContext, LessonSidebar, SidebarItem } from "../templates.js";
 import { esc } from "../utils.js";
 import { BASE } from "../config.js";
@@ -43,9 +42,14 @@ function renderRelations(entry: Entry, byId: Map<string, Entry>): string {
   }
 
   if (!groups.length) return "";
-  return `<section class="card" data-pagefind-ignore>
-<h2>Related Atlas Entries</h2>
+  return `<section class="card section-card card-quiet" id="related-atlas-entries" data-pagefind-ignore>
+  <div class="section-head">
+    <span class="section-icon" aria-hidden="true">🔗</span>
+    <h2 class="section-title">Related Atlas Entries</h2>
+  </div>
+  <div class="card-body">
 ${groups.join("\n")}
+  </div>
 </section>`;
 }
 
@@ -60,11 +64,16 @@ function renderBacklinks(entry: Entry, graph: Graph, byId: Map<string, Entry>): 
     .join("\n");
 
   if (!items) return "";
-  return `<section class="card" data-pagefind-ignore>
-<h2>Linked from</h2>
+  return `<section class="card section-card card-quiet" id="linked-from" data-pagefind-ignore>
+  <div class="section-head">
+    <span class="section-icon" aria-hidden="true">↩</span>
+    <h2 class="section-title">Linked From</h2>
+  </div>
+  <div class="card-body">
 <ul>
 ${items}
 </ul>
+  </div>
 </section>`;
 }
 
@@ -133,7 +142,7 @@ export function render(entries: Entry[], graph: Graph): Map<string, string> {
   for (const entry of entries) {
     const raw    = fs.readFileSync(entry.source, "utf8");
     const parsed = matter(raw);
-    const html   = marked.parse(preprocess(parsed.content, byId)) as string;
+    const html   = renderSectionedBody(parsed.content, byId);
     const meta   = metaRecord(entry.metadata);
 
     const sidebar  = buildLessonSidebar(entry, byId);
