@@ -1,8 +1,13 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Stéphane Bélanger (白朗志远)
+
 import { Entry } from "./types.js";
 import { esc } from "./utils.js";
 
 export function extractLinks(md: string): string[] {
-  return [...md.matchAll(/\[\[([A-Z]+\d+)(?:\|[^\]]+)?\]\]/g)].map(m => m[1]);
+  return [...md.matchAll(/\[\[([A-Z]+\d+)(?:\|[^\]]+)?\]\]/g)]
+    .map(m => m[1])
+    .filter((id): id is string => id !== undefined);
 }
 
 export function preprocess(md: string, byId: Map<string, Entry>): string {

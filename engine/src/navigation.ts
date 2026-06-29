@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2026 Stéphane Bélanger (白朗志远)
+
 export function navigation() {
 return `
 <nav class="card">
