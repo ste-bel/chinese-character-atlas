@@ -201,6 +201,14 @@
   letter-spacing: 0.01em;
   line-height: 1;
 }
+/* Museum object label — the curator names the work: reading, then meaning. */
+.eb-gloss {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--ink-mid);
+  line-height: var(--lh-snug);
+  max-width: 38ch;
+}
 .eb-badges {
   display: flex;
   flex-wrap: wrap;

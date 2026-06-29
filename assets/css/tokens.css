@@ -66,6 +66,10 @@
                 "FangSong", "STSong", serif;
   --font-body:  "Palatino Linotype", "Palatino", "Book Antiqua",
                 Georgia, serif;
+  /* Editorial display serif — the scholar's & curator's voice. Elegant
+     high-contrast faces where available, graceful fallback to the body serif. */
+  --font-display: "Hoefler Text", "Baskerville", "Palatino Linotype",
+                  "Book Antiqua", Georgia, serif;
   --font-ui:    "Optima", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --font-mono:  "Menlo", "Consolas", "Courier New", monospace;
 

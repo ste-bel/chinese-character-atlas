@@ -168,7 +168,7 @@ function renderSidebar(ctx: PageContext): string {
 
 // ── Entry banner (word and character pages) ───────────────────────────────────
 
-function renderEntryBanner(ctx: PageContext): string {
+function renderEntryBanner(ctx: PageContext, gloss?: string): string {
   if (!ctx.hanzi) return "";
 
   const isWord      = ctx.type === "word";
@@ -206,6 +206,7 @@ function renderEntryBanner(ctx: PageContext): string {
       <span class="eb-pinyin">${ctx.pinyin ? esc(ctx.pinyin) : ""}</span>
       ${audioPy}
     </div>
+    ${gloss ? `<div class="eb-gloss">${esc(gloss)}</div>` : ""}
     <div class="eb-badges">${hskBadge}${freqBadge}${idBadge}${typeBadge}</div>
     ${strokeMeta ? `<div class="eb-meta">${strokeMeta}</div>` : ""}
   </div>
@@ -247,7 +248,7 @@ export function page(title: string, body: string, ctx: PageContext = {}): string
   ].filter(Boolean).join("\n    ");
 
   const hasEntryBanner = (ctx.type === "word" || ctx.type === "character") && !!ctx.hanzi;
-  const entryBanner    = hasEntryBanner ? renderEntryBanner(ctx) : "";
+  const entryBanner    = hasEntryBanner ? renderEntryBanner(ctx, title) : "";
   const breadcrumbs    = hasEntryBanner ? renderBreadcrumbs(ctx) : "";
 
   const pageTitle = title === "Chinese Character Atlas"

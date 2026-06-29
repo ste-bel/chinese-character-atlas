@@ -45,15 +45,31 @@ pre code { background: none; border: none; padding: 0; }
 ul, ol { padding-left: 1.5rem; margin-bottom: var(--sp-5); max-width: var(--measure); }
 li     { margin-bottom: var(--sp-2); line-height: var(--lh-base); }
 
+/* Scholar's pull-quote — classical citations set apart with an oversized
+   cinnabar quotation mark, like an epigraph in a fine edition. */
 blockquote {
-  border-left: 4px solid var(--crimson);
-  padding: var(--sp-4) var(--sp-5);
-  background: var(--paper-warm);
-  border-radius: 0 var(--card-radius) var(--card-radius) 0;
-  margin: var(--sp-5) 0;
+  position: relative;
+  padding: var(--sp-4) var(--sp-6) var(--sp-4) var(--sp-10);
+  margin: var(--sp-6) 0;
   color: var(--ink-mid);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
   font-style: italic;
+  line-height: var(--lh-snug);
+  max-width: var(--measure);
 }
+blockquote::before {
+  content: "\201C";
+  position: absolute;
+  left: var(--sp-2);
+  top: -0.1em;
+  font-family: var(--font-display);
+  font-size: 56px;
+  line-height: 1;
+  color: var(--cinnabar);
+  opacity: 0.55;
+}
+blockquote p { max-width: none; }
 blockquote p:last-child { margin-bottom: 0; }
 
 table {
@@ -129,14 +145,25 @@ hr::after {
 }
 
 .entry-body h3 {
-  font-family: var(--font-ui);
-  font-size: var(--text-md);
-  font-weight: 700;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 600;
   color: var(--ink);
   margin: var(--sp-6) 0 var(--sp-3);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  line-height: var(--lh-tight);
 }
 .card-body > h3:first-child { margin-top: 0; }
+
+/* The scholar's opening remark — the first sentence of the first exhibit reads
+   as an editorial lede, drawing the visitor in before the detail begins. */
+.entry-body .section-card:first-of-type .card-body > p:first-child {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  line-height: var(--lh-snug);
+  color: var(--ink);
+  max-width: var(--measure);
+}
 
 .entry-body h4 {
   font-family: var(--font-ui);
