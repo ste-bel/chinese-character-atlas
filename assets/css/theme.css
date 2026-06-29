@@ -10,7 +10,11 @@ a {
 }
 a:hover { color: var(--crimson); }
 
-p { margin-bottom: var(--sp-4); }
+p {
+  margin-bottom: var(--sp-5);
+  max-width: var(--measure);
+  line-height: var(--lh-base);
+}
 p:last-child { margin-bottom: 0; }
 
 strong { font-weight: 700; color: var(--ink); }
@@ -38,8 +42,8 @@ pre {
 }
 pre code { background: none; border: none; padding: 0; }
 
-ul, ol { padding-left: 1.4rem; margin-bottom: var(--sp-4); }
-li     { margin-bottom: var(--sp-2); line-height: 1.65; }
+ul, ol { padding-left: 1.5rem; margin-bottom: var(--sp-5); max-width: var(--measure); }
+li     { margin-bottom: var(--sp-2); line-height: var(--lh-base); }
 
 blockquote {
   border-left: 4px solid var(--crimson);

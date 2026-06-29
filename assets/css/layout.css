@@ -7,16 +7,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
-  font-size: 15px;
+  font-size: 16px;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-body);
   background: var(--paper);
   color: var(--ink-mid);
-  line-height: 1.72;
+  font-size: var(--text-base);
+  line-height: var(--lh-base);
+  letter-spacing: var(--ls-normal);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -351,7 +354,7 @@ body {
 main {
   flex: 1;
   min-width: 0;
-  padding: var(--sp-5) var(--sp-8) var(--sp-16);
+  padding: var(--sp-8) var(--sp-12) var(--sp-20);
 }
 
 /* ── Breadcrumb ───────────────────────────────────────────────────── */
