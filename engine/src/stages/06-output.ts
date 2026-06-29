@@ -210,7 +210,7 @@ function writeHomepage(entries: Entry[]): void {
   const body = `
 <div class="home-hero">
   <a href="${BASE}/people/P0001-stephane-belanger.html" class="home-seal" aria-label="About the author">
-    <img src="${BASE}/assets/images/logo/fire-horse-seal-round.svg"
+    <img src="${BASE}/assets/images/logo/fire-horse-seal-round.png"
          alt="Fire Horse seal — the Atlas logo" width="168" height="168">
   </a>
 

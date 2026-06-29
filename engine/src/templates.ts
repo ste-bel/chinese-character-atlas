@@ -60,7 +60,7 @@ export interface PageContext extends PageMeta {
  */
 export function siteSeal(opts: { size: number; className: string; alt: string }): string {
   const { size, className, alt } = opts;
-  return `<img src="${BASE}/assets/images/logo/fire-horse-seal-round.svg" `
+  return `<img src="${BASE}/assets/images/logo/fire-horse-seal-round.png" `
        + `alt="${esc(alt)}" width="${size}" height="${size}" class="${esc(className)}">`;
 }
 
