@@ -17,7 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
-import { ROOT, ATLAS, DOCS } from "../config.js";
+import { ROOT, ATLAS, DOCS, BASE } from "../config.js";
 import { Entry, Graph, SearchEntry, EntityType } from "../types.js";
 import { ensureDir, esc } from "../utils.js";
 import { page } from "../templates.js";
@@ -70,14 +70,19 @@ function writeIndexPages(entries: Entry[]): void {
 
     const items = section
       .map(e => {
-        const hanziPart = e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : "";
-        const label = esc(`${e.id}${hanziPart} ${e.title}`.trim());
-        const pinyin = e.pinyin ? ` — <em>${esc(e.pinyin)}</em>` : "";
-        return `<li><a href="/chinese-character-atlas${e.url}">${label}</a>${pinyin}</li>`;
+        const pinyin = e.pinyin ? `<span class="index-item-pinyin">${esc(e.pinyin)}</span>` : "";
+        const hanzi  = e.hanzi  ? `<span class="index-item-hanzi">${esc(e.hanzi)}</span>` : "";
+        return `<a class="index-item" href="${BASE}${e.url}">
+          <span class="index-item-id">${esc(e.id)}</span>
+          ${hanzi}
+          ${pinyin}
+          <span class="index-item-title">${esc(e.title)}</span>
+        </a>`;
       })
       .join("\n");
 
-    const body = `<section class="card"><h1>${esc(title)}</h1><ul>\n${items}\n</ul></section>`;
+    const body = `<h1 style="margin-bottom:1.2rem;font-family:var(--font-hanzi);font-size:24px;color:var(--crimson)">${esc(title)}</h1>
+<div class="index-grid">\n${items}\n</div>`;
     const file = path.join(DOCS, dir, "index.html");
     ensureDir(file);
     fs.writeFileSync(file, page(title, body), "utf8");
@@ -161,38 +166,55 @@ function writeHomepage(entries: Entry[]): void {
   const characters = entries.filter(e => e.type === "character");
   const components = entries.filter(e => e.type === "component");
   const lessons    = entries.filter(e => e.type === "lesson");
+  const books      = entries.filter(e => e.type === "book");
 
-  function sectionCard(title: string, items: Entry[], dir: string): string {
+  function entryCard(title: string, icon: string, items: Entry[], dir: string, desc: string): string {
     if (items.length === 0) return "";
-    const links = items.slice(0, 6).map(e =>
-      `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id}${e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : ""} ${e.title}`.trim())}</a></li>`
-    ).join("\n");
-    const more = items.length > 6
-      ? `<li><a href="/chinese-character-atlas/${dir}/">All ${items.length} →</a></li>`
-      : `<li><a href="/chinese-character-atlas/${dir}/">Browse all →</a></li>`;
-    return `<div class="card">
-<h2>${esc(title)} <span class="badge">${items.length}</span></h2>
-<ul>
-${links}
-${more}
-</ul>
-</div>`;
+    return `
+<a class="home-entry-card" href="${BASE}/${dir}/">
+  <div class="hec-icon">${icon}</div>
+  <div class="hec-title">${esc(title)}</div>
+  <div class="hec-count">${items.length}</div>
+  <div class="hec-desc">${esc(desc)}</div>
+</a>`;
   }
 
-  const body = `<section class="card">
-<h2>Every character tells a story.</h2>
-<p>Every story opens a civilization.</p>
-<p>The Chinese Character Atlas is an interactive encyclopedia of Chinese language, characters, history, culture, and usage — built for learners who want to understand not just <em>what</em> Chinese means, but <em>why</em>.</p>
-</section>
+  const sections = [
+    entryCard("Words",      "字", words,      "words",      "Vocabulary with examples, grammar, and cross-references"),
+    entryCard("Characters", "文", characters,  "characters", "Historical evolution, components, and cultural meaning"),
+    entryCard("Components", "部", components,  "components", "Radicals and building blocks of Chinese writing"),
+    entryCard("Lessons",    "📖", lessons,     "lessons",    "Structured learning paths through the Atlas"),
+    entryCard("Books",      "📚", books,       "books",      "Classical and modern texts referenced throughout"),
+  ].filter(Boolean).join("\n");
 
-<section class="grid">
-${[
-  sectionCard("Words", words, "words"),
-  sectionCard("Characters", characters, "characters"),
-  sectionCard("Components", components, "components"),
-  sectionCard("Lessons", lessons, "lessons"),
-].filter(Boolean).join("\n")}
-</section>`;
+  const body = `
+<div class="home-hero">
+  <a href="${BASE}/people/P0001-stephane-belanger.html" class="home-seal" aria-label="About the author">
+    <img src="${BASE}/assets/images/logo/fire-horse-seal.png"
+         alt="白朗志远 Fire Horse seal" width="140" height="140">
+  </a>
+
+  <div class="home-chinese">漢字之美</div>
+
+  <p class="home-motto">Every character tells a story.<br>Every story opens a civilization.</p>
+
+  <p class="home-sub">
+    An interactive encyclopedia of Chinese language, characters,
+    history, culture, and usage — built for learners who want to understand
+    not just <em>what</em> Chinese means, but <em>why</em>.
+  </p>
+
+  <div class="home-stats">
+    ${words.length      ? `<div class="home-stat"><div class="home-stat-num">${words.length}</div><div class="home-stat-label">Words</div></div>` : ""}
+    ${characters.length ? `<div class="home-stat"><div class="home-stat-num">${characters.length}</div><div class="home-stat-label">Characters</div></div>` : ""}
+    ${components.length ? `<div class="home-stat"><div class="home-stat-num">${components.length}</div><div class="home-stat-label">Components</div></div>` : ""}
+    ${lessons.length    ? `<div class="home-stat"><div class="home-stat-num">${lessons.length}</div><div class="home-stat-label">Lessons</div></div>` : ""}
+  </div>
+
+  <div class="home-entry-grid">
+    ${sections}
+  </div>
+</div>`;
 
   fs.writeFileSync(path.join(DOCS, "index.html"), page("Chinese Character Atlas", body), "utf8");
 }

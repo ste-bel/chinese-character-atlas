@@ -17,6 +17,7 @@ import { Entry, Graph, metaRecord } from "../types.js";
 import { preprocess } from "../markdown.js";
 import { page, PageContext, LessonSidebar, SidebarItem } from "../templates.js";
 import { esc } from "../utils.js";
+import { BASE } from "../config.js";
 
 const RELATION_FIELDS: string[] = [
   "words", "characters", "components", "lessons",
@@ -35,7 +36,7 @@ function renderRelations(entry: Entry, byId: Map<string, Entry>): string {
       if (typeof id !== "string") return "";
       const target = byId.get(id);
       if (!target) return `<li>${esc(id)}</li>`;
-      return `<li><a href="/chinese-character-atlas${target.url}">${esc(`${target.id}${target.hanzi && !target.title.includes(target.hanzi) ? ` ${target.hanzi}` : ""} ${target.title}`.trim())}</a></li>`;
+      return `<li><a href="${BASE}${target.url}">${esc(`${target.id}${target.hanzi && !target.title.includes(target.hanzi) ? ` ${target.hanzi}` : ""} ${target.title}`.trim())}</a></li>`;
     }).filter(Boolean).join("\n");
 
     if (items) groups.push(`<h3>${esc(field)}</h3><ul>${items}</ul>`);
@@ -55,7 +56,7 @@ function renderBacklinks(entry: Entry, graph: Graph, byId: Map<string, Entry>): 
   const items = incomingIds
     .map(id => byId.get(id))
     .filter((e): e is Entry => e !== undefined)
-    .map(e => `<li><a href="/chinese-character-atlas${e.url}">${esc(`${e.id}${e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : ""} ${e.title}`.trim())}</a></li>`)
+    .map(e => `<li><a href="${BASE}${e.url}">${esc(`${e.id}${e.hanzi && !e.title.includes(e.hanzi) ? ` ${e.hanzi}` : ""} ${e.title}`.trim())}</a></li>`)
     .join("\n");
 
   if (!items) return "";
@@ -104,7 +105,7 @@ function buildLessonSidebar(
         id: w.id,
         hanzi: w.hanzi,
         pinyin: w.pinyin,
-        url: `/chinese-character-atlas${w.url}`,
+        url: `${BASE}${w.url}`,
         active: w.id === entry.id,
       } satisfies SidebarItem;
     })
@@ -119,9 +120,9 @@ function buildLessonSidebar(
     lessonTitle:   lessonEntry.title,
     lessonNumber:  lessonNum,
     items,
-    prevUrl:  prevId  ? `/chinese-character-atlas${byId.get(prevId)?.url  ?? ""}` : null,
-    nextUrl:  nextId  ? `/chinese-character-atlas${byId.get(nextId)?.url  ?? ""}` : null,
-    allUrl:   `/chinese-character-atlas${lessonEntry.url}`,
+    prevUrl:  prevId  ? `${BASE}${byId.get(prevId)?.url  ?? ""}` : null,
+    nextUrl:  nextId  ? `${BASE}${byId.get(nextId)?.url  ?? ""}` : null,
+    allUrl:   `${BASE}${lessonEntry.url}`,
   };
 }
 
@@ -147,7 +148,8 @@ export function render(entries: Entry[], graph: Graph): Map<string, string> {
       pinyin:           entry.pinyin ?? undefined,
       lesson:           (meta.lesson          as number | undefined) ?? undefined,
       hsk:              (meta.hsk             as number | undefined) ?? undefined,
-      frequency_rank:   (meta.frequency_rank  as number | undefined) ?? undefined,
+      frequency_rank:    (meta.frequency_rank  as number | undefined) ?? undefined,
+      stroke_count:      (meta.stroke_count    as number | undefined) ?? undefined,
       wordIndexInLesson: wordIdx ?? undefined,
       sidebar,
     };
