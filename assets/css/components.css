@@ -304,40 +304,65 @@ button.audio-btn:hover {
 }
 button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
 
-/* ── Atlas Note ───────────────────────────────────────────────────── */
+/* ── Atlas Note ───────────────────────────────────────────────────────
+   The Atlas's signature callout — a gold-framed manuscript aside, instantly
+   recognizable, set apart from the surrounding exhibit prose. */
 .atlas-note {
+  position: relative;
   border: 1px solid var(--gold-mid);
-  border-left: 4px solid var(--gold-rule);
   border-radius: var(--card-radius);
-  background: linear-gradient(
-    135deg,
-    rgba(232, 208, 144, 0.22) 0%,
-    rgba(255, 254, 246, 0.8)  100%
-  );
-  padding: var(--sp-5) var(--sp-6);
-  margin: var(--sp-5) 0;
+  background:
+    linear-gradient(135deg,
+      rgba(232, 208, 144, 0.28) 0%,
+      rgba(255, 254, 246, 0.92) 55%);
+  padding: var(--sp-6) var(--sp-8) var(--sp-6) var(--sp-10);
+  margin: var(--rhythm) 0;
+  box-shadow: var(--shadow-card);
+  max-width: var(--measure) !important;
+}
+/* Gilded spine */
+.atlas-note::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  border-radius: var(--card-radius) 0 0 var(--card-radius);
+  background: linear-gradient(180deg, var(--gold-light), var(--gold-rule) 50%, var(--gold-mid));
 }
 .atlas-note-head {
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
-  margin-bottom: var(--sp-3);
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
 }
 .atlas-note-diamond {
   color: var(--gold-rule);
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1;
+  filter: drop-shadow(0 1px 1px rgba(120, 90, 20, 0.3));
 }
 .atlas-note-label {
   font-family: var(--font-ui);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: 800;
-  letter-spacing: 0.18em;
+  letter-spacing: var(--ls-widest);
   text-transform: uppercase;
   color: var(--gold-mid);
 }
-.atlas-note p { margin-bottom: var(--sp-2); }
-.atlas-note p:last-child { margin-bottom: 0; }
+/* Hairline trailing the label */
+.atlas-note-head::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-rule), transparent);
+}
+.atlas-note-body {
+  font-size: var(--text-base);
+  line-height: var(--lh-relaxed);
+  color: var(--ink-mid);
+}
+.atlas-note-body p { margin-bottom: var(--sp-3); max-width: none; }
+.atlas-note-body p:last-child { margin-bottom: 0; }
 
 /* ── Historical evolution timeline ────────────────────────────────── */
 .evolution-grid {
