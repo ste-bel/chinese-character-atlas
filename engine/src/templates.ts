@@ -35,7 +35,7 @@ ${metaTags}
   <div class="header-inner">
     <a href="/chinese-character-atlas/" class="header-seal" aria-label="Home">
       <img src="/chinese-character-atlas/assets/images/seals/bai-lang-zhiyuan-fire-horse-seal.png"
-           alt="白朗志远 Fire Horse seal" width="80" height="80">
+           alt="白朗志远 Fire Horse seal" width="88" height="88">
     </a>
     <div class="header-titles">
       <h1>Chinese Character Atlas</h1>
