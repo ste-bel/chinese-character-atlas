@@ -14,7 +14,7 @@ The current build's version and statistics are in `docs/statistics.json` after e
 
 Foundation: complete
 
-Active milestone: Phase 2 — Core Vocabulary
+Active milestone: Phase 2 — Visual Excellence (W0001 is the reference standard)
 
 Long-term goal: Build the world's most interconnected Chinese language encyclopedia.
 

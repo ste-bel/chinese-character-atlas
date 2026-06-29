@@ -4,6 +4,68 @@ Each entry covers one session. Format: what changed, why, and what to do next.
 
 ---
 
+## 2026-06-29 (Session 4) — Visual Excellence Sprint
+
+Acceptance review (v0.2) scored architecture/engine highly but flagged the
+visual experience: Infographic Fidelity 3/10, Museum Experience 5/10, Homepage
+6/10, Typography 6.5/10. This sprint is experience-only — no architectural
+refactor — and addresses all ten review priorities.
+
+### What changed
+
+**Design tokens & typography (P2, P10)**
+- `assets/css/tokens.css`: added line-height, letter-spacing, reading-measure,
+  and rhythm token families; enlarged the *reading* scale (base 17px, lh 1.8)
+  while keeping UI chrome compact; roomier cards (pad 28 / gap 20 / radius 10).
+- `assets/css/layout.css`, `theme.css`: 16px root, token-driven body type,
+  generous `main` padding, prose constrained to `--measure`, larger h3/h4.
+- New `DESIGN_TOKENS.md` — the flat token reference (single source of truth).
+
+**Museum card grid (P1, P7)**
+- New `engine/src/sections.ts`: fence-aware H2 splitter turns each section into
+  a self-contained museum panel — crimson number circle + gold line-art icon +
+  tracked title — stacked at a comfortable measure with generous rhythm.
+  (Long-form content is stacked, not force-fit into a rigid poster grid, to
+  protect reading width.) Title→icon/variant map; feature/quiet/warning cards.
+- `05-render.ts`: uses `renderSectionedBody`; relations/backlinks adopt the
+  same card structure. Retired the old flat h2 banner rule.
+
+**Hero (P3)**
+- `components.css`: entry banner enlarged — Hanzi `clamp(96–168px)` on a soft
+  radial backdrop, taller banner, monumental WORD strip, enlarged crimson
+  pinyin, roomier Quick Audio; reflows (stacks) under 720px.
+
+**Atlas Notes (P8)**
+- `markdown.ts`: note inner Markdown is now parsed (was opaque block HTML) and
+  emitted with the diamond/label structure; restyled as a gilded manuscript
+  aside — signature, instantly recognizable.
+
+**Pinyin validation (P9)**
+- New `engine/src/pinyin.ts` + stage 3: strict checks on `pinyin`/
+  `author_pinyin` fields (numeric tones, stray markers, combining diacritics =
+  errors) and a conservative body scan for numeric-tone pinyin (warnings).
+  Existing content passes clean (0/0).
+
+**Branding & homepage (P4, P5)**
+- Homepage seal framed as a museum logo — radial halo, generous whitespace,
+  aspect preserved. Logo (round seal) vs Author Signature (full composition,
+  About page) separation confirmed.
+- Homepage hero introduces a *civilization*: grand `clamp(64–104px)` title,
+  evocative copy, frameless hairline stat ledger, "Enter the Atlas" → W0001.
+
+**W0001 (P6)**
+- Now the reference implementation end-to-end: hero, numbered museum cards,
+  warning/feature/quiet variants, signature Atlas Notes, clean tables, museum
+  footer. Verified desktop + mobile.
+
+### What to do next
+- Author Historical Evolution as the 5-stage `.evolution-grid` and examples as
+  `.example-block` structures (CSS already exists) to deepen infographic
+  fidelity — a content-shape pass, deferred per "don't add content yet."
+- Apply the W0001 standard to one Character, one Component, and one Lesson page.
+
+---
+
 ## 2026-06-28 (Session 3) — Museum Edition Sprint
 
 ### What changed
