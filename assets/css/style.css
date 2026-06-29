@@ -108,15 +108,19 @@ header::before {
 /* Seal / Logo */
 .header-seal {
   flex-shrink: 0;
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  background: #fff;
 }
 
-.header-seal img,
-.header-seal svg {
+.header-seal img {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
 }
 
 /* Title block */
@@ -487,7 +491,7 @@ span.badge.hsk {
 
   .header-titles h1 { font-size: 1.5rem; }
   .header-hanzi { display: none; }
-  .header-seal { width: 56px; height: 56px; }
+  .header-seal { width: 60px; height: 60px; }
 
   .grid { grid-template-columns: 1fr; }
 
