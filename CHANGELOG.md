@@ -4,6 +4,45 @@ Each entry covers one session. Format: what changed, why, and what to do next.
 
 ---
 
+## 2026-06-29 (Session 5) — Identity: Museum of Living Knowledge
+
+Direction shift from the user: **the infographic is no longer the target — it
+was training wheels.** The Atlas must surpass it and develop its own identity:
+a *Museum of Living Knowledge* — classical-museum foundation, living-manuscript
+scholarship, and cinematic emotion used sparingly as reward. "Entering a great
+museum, then guided by a scholar."
+
+### What changed
+
+**Doctrine**
+- New `ATLAS_IDENTITY.md` — the north star (three strands, marks & guardians,
+  keywords, what it rules out, the test). `ATLAS_BIBLE.md` §7/§10 and
+  `DESIGN_SYSTEM.md` reframe the infographic as origin, not ceiling.
+
+**Materials** (`tokens.css`, `layout.css`)
+- Material palette: stone, bronze, cinnabar families. Inline-SVG parchment
+  grain over the page (no external asset). Footer becomes a deep-stone lower
+  gallery with bronze→gold rule and parchment/gold text.
+
+**Premium typography & scholar's voice** (`tokens.css`, `templates.ts`, `theme.css`, `components.css`)
+- New `--font-display` editorial serif. Hero gains a museum object-label gloss
+  (reading · meaning). First exhibit opens with an editorial lede; h3 subheads
+  in display serif; blockquotes become cinnabar-marked scholar's pull-quotes.
+
+**Cinematic reward** (`components.css`)
+- Sparing, `prefers-reduced-motion`-safe: exhibits settle into place on load;
+  the homepage threshold enters calmly; the Fire Horse seal breathes a slow
+  cinnabar ember as the Atlas's living guardian.
+
+### What to do next
+- The signature exhibit: a true Historical Evolution timeline (oracle → bronze
+  → seal → clerical → regular). Needs authentic per-script glyph forms — an
+  asset decision; do not fabricate glyphs (identity: authenticity over ornament).
+- Carry the identity onto a Character, a Component, and a Lesson page.
+- Consider self-hosted display/CJK fonts for a fully owned typographic voice.
+
+---
+
 ## 2026-06-29 (Session 4) — Visual Excellence Sprint
 
 Acceptance review (v0.2) scored architecture/engine highly but flagged the
