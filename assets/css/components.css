@@ -856,3 +856,46 @@ button.audio-btn.banner-audio { font-size: 14px; padding: 4px 9px; }
 .difficulty-intermediate { background: rgba(26,62,92,0.1);  color: var(--badge-hsk); }
 .difficulty-advanced     { background: rgba(139,26,26,0.1); color: var(--crimson); }
 
+
+/* ── Cinematic reward layer ────────────────────────────────────────────
+   Motion is used sparingly, as reward, and only where it deepens the sense
+   of arriving at an exhibit. Everything here is gated behind
+   prefers-reduced-motion: no-preference — the default (and reduced-motion)
+   state is fully visible and still. */
+
+@keyframes atlas-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes atlas-ember {
+  from { filter: var(--shadow-seal) drop-shadow(0 0 4px rgba(197, 64, 42, 0)); }
+  to   { filter: var(--shadow-seal) drop-shadow(0 0 18px rgba(197, 64, 42, 0.45)); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Entry pages: the hero, then each exhibit, settle into place in sequence. */
+  .entry-banner {
+    animation: atlas-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .entry-body > .section-card {
+    animation: atlas-rise 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  }
+  .entry-body > .section-card:nth-of-type(1) { animation-delay: 0.06s; }
+  .entry-body > .section-card:nth-of-type(2) { animation-delay: 0.12s; }
+  .entry-body > .section-card:nth-of-type(3) { animation-delay: 0.18s; }
+  .entry-body > .section-card:nth-of-type(4) { animation-delay: 0.24s; }
+  .entry-body > .section-card:nth-of-type(n+5) { animation-delay: 0.30s; }
+
+  /* Homepage: a calm entrance for the threshold. */
+  .home-hero > * { animation: atlas-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .home-seal     { animation-delay: 0.05s; }
+  .home-chinese  { animation-delay: 0.15s; }
+  .home-english  { animation-delay: 0.22s; }
+  .home-motto    { animation-delay: 0.30s; }
+  .home-sub      { animation-delay: 0.38s; }
+  .home-cta      { animation-delay: 0.46s; }
+  .home-stats    { animation-delay: 0.54s; }
+
+  /* The Fire Horse, living guardian — a slow ember breath. */
+  .home-seal img { animation: atlas-ember 6s ease-in-out infinite alternate; }
+}
